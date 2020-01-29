@@ -15,5 +15,8 @@ _Nowadays, cellphones and technology are a huge part of daily life. But it can b
 
 ## Intended Users
 _This app would be for people who want to increase their daily productivity, parents wanting to monitor their kids device usage, or if you simply want to see how much time you spend using your devices while you maybe should be doing something more important._
+
+### [User stories](user-stories)
+
 ## External Services
 _The only required external service as of now would be the Google maps API._
