@@ -22,11 +22,11 @@ _Nowadays, cellphones and technology are a huge part of daily life. But it can b
 ## Intended Users
 _This app would be for:_
 
-* People who want to increase their daily productivity by limiting device usage at work or at the gym.
+* People who want to increase their daily productivity by limiting device usage in places they maybe shouldn't be using them.
 
 * Parents wanting to monitor and limit their kids device usage at school but maybe not at home.  
 
-* Users who simply want to see how much they user their devices in places they maybe shouldn't.
+* Users who simply want to see how much they user their devices at work or at the gym.
 
 ### [User stories](user-stories.md)
 
