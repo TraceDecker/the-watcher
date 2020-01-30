@@ -1,5 +1,7 @@
 # User stories
 
-* Parents that want to monitor their kids while they might not be home and see what your kids are doing while at school to help their kids be more productive with their school time and free time.
+* As a parent, I know I can't always know what's going on with my children. That's why I want an easy way to see where they are, and a way I can help them be more productive without interrupting their lives too much.
 
-* A working adult a who want's to be more productive with their time by monitoring and limiting their own app usage while they may be at work and the gym. 
+* Being a college student can be stressful, and staying focused can be even worse. I want a way to limit distractions throughout the day but still have some time here and there for what I want to do, because the most important thing should be building s future.
+
+* As a working adult, I'm realizing more and more that I could be making better use of my time everyday. I want an easy way to track my productivity to see where I could improve myself at work, the gym, and at home too.
