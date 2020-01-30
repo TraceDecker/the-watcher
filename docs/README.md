@@ -20,15 +20,15 @@ _Nowadays, cellphones and technology are a huge part of daily life. But it can b
 * Device to device connection for superuser control(sorry kids).
 
 ## Intended Users
-_This app would be for:
+_This app would be for:_
 
-* People who want to increase their daily productivity by limiting device usage at work or at the gym. 
+* People who want to increase their daily productivity by limiting device usage at work or at the gym.
 
 * Parents wanting to monitor and limit their kids device usage at school but maybe not at home.  
 
-* Users who simply want to see how much they user their devices in places they maybe shouldn't._
+* Users who simply want to see how much they user their devices in places they maybe shouldn't.
 
-### [User stories](user-stories)
+### [User stories](user-stories.md)
 
 ## External Services
 
