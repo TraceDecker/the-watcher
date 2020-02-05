@@ -34,7 +34,7 @@ _This app would be for:_
 
 * Mapbox
 
-## Design documentation
+## Design Documentation
 
 ### [Wireframe](wireframe.md)
 
