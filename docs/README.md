@@ -32,7 +32,9 @@ _This app would be for:_
 
 ## External Services
 
-* Mapbox
+* [Mapbox](https://docs.mapbox.com/api/maps/)
+
+* Mapbox [Forward Geocoding](https://docs.mapbox.com/api/search/#geocoding) - Allows the user to search for desired locations for pin dropping.
 
 ## Design Documentation
 
