@@ -38,6 +38,8 @@ _This app would be for:_
 
 * Android Permissions [ACTIVITY_RECOGNITION](https://developer.android.com/reference/android/Manifest.permission_group) - Allows the app to use features like location and needed to make app restrictions.
 
+* App will require location to function properly and internet connection to search for new locations for pins.
+
 ## Design Documentation
 
 ### [Wireframe](wireframe.md)
