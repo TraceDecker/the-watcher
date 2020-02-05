@@ -36,6 +36,8 @@ _This app would be for:_
 
 * Mapbox [Forward Geocoding](https://docs.mapbox.com/api/search/#geocoding) - Allows the user to search for desired locations for pin dropping.
 
+* Android Permissions [ACTIVITY_RECOGNITION](https://developer.android.com/reference/android/Manifest.permission_group) - Allows the app to use features like location and needed to make app restrictions.
+
 ## Design Documentation
 
 ### [Wireframe](wireframe.md)
