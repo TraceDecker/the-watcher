@@ -33,3 +33,9 @@ _This app would be for:_
 ## External Services
 
 * Mapbox
+
+## Design documentation
+
+### [Wireframe](wireframe.md)
+
+### [Entity-relationship diagram](erd.md)
