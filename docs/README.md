@@ -37,7 +37,7 @@ _This app would be for:_
 
 * Mapbox [Forward Geocoding](https://docs.mapbox.com/api/search/#geocoding) - Allows the user to search for desired locations for pin dropping.
 
-* Manifest.permission_group [ACTIVITY_RECOGNITION](https://developer.android.com/reference/android/Manifest.permission_group) - Allows the app to use features like location and needed to make app restrictions.
+* Manifest.permission_group [ACTIVITY_RECOGNITION](https://developer.android.com/reference/android/Manifest.permission_group) - Allows the app to use features like location, and is needed to make app restrictions function.
 
 * [DeviceAdminService](https://developer.android.com/reference/android/app/admin/DeviceAdminService?hl=en) - Allows the app to always run in the background, it also has the ability to disable/enable its own service. MUST use protected Permissions, otherwise device will ignore it.
 
