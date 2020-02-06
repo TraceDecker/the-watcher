@@ -1,7 +1,7 @@
 ## Overview
 
 ## Description
-_Nowadays, cellphones and technology are a huge part of daily life. But it can be easy to get carried away and lose focus of the task at hand. This is an app that can monitor app usage while the user is at places like school, work, the gym, or even at home too._
+_Nowadays, cellphones and technology are a huge part of daily life. But it can be easy to get carried away and lose focus of the task at hand. This app can monitor app usage at locations marked by pins on a map, and time limits may be set for specific apps, at specific locations. Productivity is the goal, not limitation. This app will help you increase productivity, decrease device usage as distractions from work or school, and leave enough time for games and social media elsewhere._
 
 ## Key Features
 
@@ -20,9 +20,10 @@ _Nowadays, cellphones and technology are a huge part of daily life. But it can b
 * Device to device connection for superuser control(sorry kids).
 
 ## Intended Users
+
 _This app would be for:_
 
-* People who want to increase their daily productivity by limiting device usage in places they maybe shouldn't be using them.
+* People who want to increase their daily productivity by limiting device usage in places where more focus is required.
 
 * Parents wanting to monitor and limit their kids device usage at school but maybe not at home.  
 
