@@ -31,11 +31,14 @@ public class Policy {
   @PrimaryKey(autoGenerate = true)
   private long id;
 
+  @ColumnInfo(name = "app_id")
+  private long appId;
+
   @ColumnInfo(name = "location_id")
   private long locationId;
 
   @ColumnInfo(index = true)
-  private boolean restrictions;
+  private boolean isRestricted;
 
   @ColumnInfo(name = "time_value")
   private long timeValue;
@@ -48,6 +51,14 @@ public class Policy {
     this.id = id;
   }
 
+  public long getAppId() {
+    return appId;
+  }
+
+  public void setAppId(long appId) {
+    this.appId = appId;
+  }
+
   public long getLocationId() {
     return locationId;
   }
@@ -56,12 +67,12 @@ public class Policy {
     this.locationId = locationId;
   }
 
-  public boolean isRestrictions() {
-    return restrictions;
+  public boolean isRestricted() {
+    return isRestricted;
   }
 
-  public void setRestrictions(boolean restrictions) {
-    this.restrictions = restrictions;
+  public void setRestricted(boolean restricted) {
+    this.isRestricted = restricted;
   }
 
   public long getTimeValue() {
