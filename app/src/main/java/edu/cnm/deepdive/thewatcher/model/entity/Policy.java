@@ -72,7 +72,7 @@ public class Policy {
   }
 
   public void setRestricted(boolean restricted) {
-    this.isRestricted = restricted;
+    isRestricted = restricted;
   }
 
   public long getTimeValue() {
@@ -83,3 +83,4 @@ public class Policy {
     this.timeValue = timeValue;
   }
 }
+

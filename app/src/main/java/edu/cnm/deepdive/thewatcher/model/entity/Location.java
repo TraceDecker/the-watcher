@@ -36,8 +36,8 @@ public class Location {
   @ColumnInfo(index = true)
   private double latitude;
 
-  @Ignore
-  private List<Policy> policies;
+  @ColumnInfo(name = "policy_id")
+  private long policyId;
 
   public String getLocationId() {
     return locationId;
@@ -71,11 +71,11 @@ public class Location {
     this.latitude = latitude;
   }
 
-  public List<Policy> getPolicies() {
-    return policies;
+  public long getPolicyId() {
+    return policyId;
   }
 
-  public void setPolicies(List<Policy> policies) {
-    this.policies = policies;
+  public void setPolicyId(long policyId) {
+    this.policyId = policyId;
   }
 }
