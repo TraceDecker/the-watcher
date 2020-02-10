@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity(
     foreignKeys = {
-        @ForeignKey(
+        @ForeignKey( // References Policy id of policy table.
             entity = Policy.class,
             parentColumns = "policy_id",
             childColumns = "policy_id",
@@ -21,6 +21,7 @@ import java.util.List;
         @Index(value = "location_name", unique = true),
     }
 )
+// layout of Location table.
 public class Location {
 
   @ColumnInfo(name = "location_id", collate = ColumnInfo.NOCASE)

@@ -25,6 +25,7 @@ import androidx.room.PrimaryKey;
         @Index(value = "time_value", unique = true)
     }
 )
+// Layout of Policy table.
 public class Policy {
 
   @ColumnInfo(name = "policy_id")

@@ -20,6 +20,7 @@ import androidx.room.PrimaryKey;
         @Index(value = "app_package")
     }
 )
+// layout of the App table.
 public class App {
 
   @ColumnInfo(name = "app_id")
