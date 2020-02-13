@@ -26,7 +26,7 @@ public interface AppDao {
   Single<Integer> update(Policy policy);
 
   @Delete
-  Single<Integer> delete(Policy... policy);
+  Single<Integer> delete(Policy... policies);
 
   @Query("SELECT * FROM App ORDER BY app_name")
   LiveData<List<App>> select();

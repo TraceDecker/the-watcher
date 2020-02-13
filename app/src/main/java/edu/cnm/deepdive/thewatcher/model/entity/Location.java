@@ -26,7 +26,7 @@ public class Location {
 
   @ColumnInfo(name = "location_id", collate = ColumnInfo.NOCASE)
   @PrimaryKey(autoGenerate = true)
-  private String locationId;
+  private long locationId;
 
   @ColumnInfo(name = "location_name", collate = ColumnInfo.NOCASE)
   private String locationName;
@@ -40,11 +40,11 @@ public class Location {
   @ColumnInfo(name = "policy_id")
   private long policyId;
 
-  public String getLocationId() {
+  public long getLocationId() {
     return locationId;
   }
 
-  public void setLocationId(String locationId) {
+  public void setLocationId(long locationId) {
     this.locationId = locationId;
   }
 

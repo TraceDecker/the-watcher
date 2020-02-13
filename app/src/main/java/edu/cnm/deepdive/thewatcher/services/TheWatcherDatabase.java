@@ -20,7 +20,12 @@ import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 public abstract class TheWatcherDatabase extends RoomDatabase {
 
   private static final String DB_NAME = "watcher_db";
+
   private static Application context;
+
+  public static void setContext(Application context) {
+    TheWatcherDatabase.context = context;
+  }
 
   public static TheWatcherDatabase getInstance() {
     return InstanceHolder.INSTANCE;
@@ -32,12 +37,7 @@ public abstract class TheWatcherDatabase extends RoomDatabase {
 
   public abstract LocationDao getLocationDao();
 
-  public static void setContext(Application context) {
-    TheWatcherDatabase.context = context;
-  }
-
   private static class InstanceHolder {
-
 
     private static final TheWatcherDatabase INSTANCE = Room.databaseBuilder(
         context, TheWatcherDatabase.class, DB_NAME)
