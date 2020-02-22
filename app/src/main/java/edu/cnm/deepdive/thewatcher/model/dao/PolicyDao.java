@@ -24,7 +24,7 @@ public interface PolicyDao {
   @Delete
   Single<Integer> delete(Policy... policies);
 
-  @Query("SELECT * FROM Policy ORDER BY isRestricted")
+  @Query("SELECT * FROM Policy ORDER BY restricted DESC")
   LiveData<List<Policy>> select();
 
 }

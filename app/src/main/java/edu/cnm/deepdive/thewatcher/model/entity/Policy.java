@@ -22,7 +22,9 @@ import androidx.room.PrimaryKey;
         )
     },
     indices = {
-        @Index(value = "time_value", unique = true)
+        @Index(value = "time_value"),
+        @Index(value = "app_id"),
+        @Index(value = "location_id")
     }
 )
 // Layout of Policy table.
@@ -39,7 +41,7 @@ public class Policy {
   private long locationId;
 
   @ColumnInfo(index = true)
-  private boolean isRestricted;
+  private boolean restricted;
 
   @ColumnInfo(name = "time_value")
   private long timeValue;
@@ -69,11 +71,11 @@ public class Policy {
   }
 
   public boolean isRestricted() {
-    return isRestricted;
+    return restricted;
   }
 
   public void setRestricted(boolean restricted) {
-    isRestricted = restricted;
+    this.restricted = restricted;
   }
 
   public long getTimeValue() {

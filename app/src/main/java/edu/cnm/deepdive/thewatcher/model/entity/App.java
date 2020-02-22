@@ -7,17 +7,9 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(
-    foreignKeys = {
-        @ForeignKey(
-            entity = Policy.class,
-            parentColumns = "policy_id",
-            childColumns = "policy_id",
-            onDelete = ForeignKey.CASCADE
-        )
-    },
     indices = {
         @Index(value = "app_name"),
-        @Index(value = "app_package")
+        @Index(value = "app_package", unique = true)
     }
 )
 // layout of the App table.
@@ -33,9 +25,6 @@ public class App {
 
   @ColumnInfo(name = "app_package", collate = ColumnInfo.NOCASE)
   private String appPackage;
-
-  @ColumnInfo(name = "policy_id")
-  private long policyId;
 
   public long getId() {
     return id;
@@ -59,13 +48,5 @@ public class App {
 
   public void setAppPackage(String appPackage) {
     this.appPackage = appPackage;
-  }
-
-  public long getPolicyId() {
-    return policyId;
-  }
-
-  public void setPolicyId(long policyId) {
-    this.policyId = policyId;
   }
 }

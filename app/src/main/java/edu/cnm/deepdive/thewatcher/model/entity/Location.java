@@ -9,14 +9,6 @@ import androidx.room.PrimaryKey;
 import java.util.List;
 
 @Entity(
-    foreignKeys = {
-        @ForeignKey( // References Policy id of policy table.
-            entity = Policy.class,
-            parentColumns = "policy_id",
-            childColumns = "policy_id",
-            onDelete = ForeignKey.CASCADE
-        )
-    },
     indices = {
         @Index(value = "location_name", unique = true),
     }
@@ -37,8 +29,6 @@ public class Location {
   @ColumnInfo(index = true)
   private double latitude;
 
-  @ColumnInfo(name = "policy_id")
-  private long policyId;
 
   public long getLocationId() {
     return locationId;
@@ -70,13 +60,5 @@ public class Location {
 
   public void setLatitude(double latitude) {
     this.latitude = latitude;
-  }
-
-  public long getPolicyId() {
-    return policyId;
-  }
-
-  public void setPolicyId(long policyId) {
-    this.policyId = policyId;
   }
 }

@@ -16,7 +16,6 @@ import edu.cnm.deepdive.thewatcher.model.entity.Policy;
     version = 1,
     exportSchema = true
 )
-
 public abstract class TheWatcherDatabase extends RoomDatabase {
 
   private static final String DB_NAME = "watcher_db";
