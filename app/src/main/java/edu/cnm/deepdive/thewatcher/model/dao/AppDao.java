@@ -28,12 +28,6 @@ public interface AppDao {
   @Delete
   Single<Integer>delete(App... apps);
 
-  @Delete
-  Single<Integer> delete(Policy... policies);
-
-  @Delete
-  Single<Integer> delete(Location... locations);
-
   @Query("SELECT * FROM App ORDER BY app_name")
   LiveData<List<App>> select();
 

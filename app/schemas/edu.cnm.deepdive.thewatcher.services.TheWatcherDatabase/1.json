@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cf5fff3a5ea45023d40d8ff8aab836e7",
+    "identityHash": "4ba657924e07207062551928929cccf3",
     "entities": [
       {
         "tableName": "App",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`app_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `app_name` TEXT COLLATE NOCASE, `app_package` TEXT COLLATE NOCASE, `policy_id` INTEGER NOT NULL, FOREIGN KEY(`policy_id`) REFERENCES `Policy`(`policy_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`app_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `app_name` TEXT COLLATE NOCASE, `app_package` TEXT COLLATE NOCASE)",
         "fields": [
           {
             "fieldPath": "id",
@@ -25,12 +25,6 @@
             "columnName": "app_package",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "policyId",
-            "columnName": "policy_id",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -50,30 +44,18 @@
           },
           {
             "name": "index_App_app_package",
-            "unique": false,
+            "unique": true,
             "columnNames": [
               "app_package"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_App_app_package` ON `${TABLE_NAME}` (`app_package`)"
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_App_app_package` ON `${TABLE_NAME}` (`app_package`)"
           }
         ],
-        "foreignKeys": [
-          {
-            "table": "Policy",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "policy_id"
-            ],
-            "referencedColumns": [
-              "policy_id"
-            ]
-          }
-        ]
+        "foreignKeys": []
       },
       {
         "tableName": "Policy",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`policy_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `app_id` INTEGER NOT NULL, `location_id` INTEGER NOT NULL, `isRestricted` INTEGER NOT NULL, `time_value` INTEGER NOT NULL, FOREIGN KEY(`app_id`) REFERENCES `App`(`app_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`location_id`) REFERENCES `Location`(`location_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`policy_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `app_id` INTEGER NOT NULL, `location_id` INTEGER NOT NULL, `restricted` INTEGER NOT NULL, `time_value` INTEGER NOT NULL, FOREIGN KEY(`app_id`) REFERENCES `App`(`app_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`location_id`) REFERENCES `Location`(`location_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -94,8 +76,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "isRestricted",
-            "columnName": "isRestricted",
+            "fieldPath": "restricted",
+            "columnName": "restricted",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -115,19 +97,35 @@
         "indices": [
           {
             "name": "index_Policy_time_value",
-            "unique": true,
+            "unique": false,
             "columnNames": [
               "time_value"
             ],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Policy_time_value` ON `${TABLE_NAME}` (`time_value`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_time_value` ON `${TABLE_NAME}` (`time_value`)"
           },
           {
-            "name": "index_Policy_isRestricted",
+            "name": "index_Policy_app_id",
             "unique": false,
             "columnNames": [
-              "isRestricted"
+              "app_id"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_isRestricted` ON `${TABLE_NAME}` (`isRestricted`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_app_id` ON `${TABLE_NAME}` (`app_id`)"
+          },
+          {
+            "name": "index_Policy_location_id",
+            "unique": false,
+            "columnNames": [
+              "location_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_location_id` ON `${TABLE_NAME}` (`location_id`)"
+          },
+          {
+            "name": "index_Policy_restricted",
+            "unique": false,
+            "columnNames": [
+              "restricted"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_restricted` ON `${TABLE_NAME}` (`restricted`)"
           }
         ],
         "foreignKeys": [
@@ -157,7 +155,7 @@
       },
       {
         "tableName": "Location",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL COLLATE NOCASE, `location_name` TEXT COLLATE NOCASE, `longitude` REAL NOT NULL, `latitude` REAL NOT NULL, `policy_id` INTEGER NOT NULL, FOREIGN KEY(`policy_id`) REFERENCES `Policy`(`policy_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL COLLATE NOCASE, `location_name` TEXT COLLATE NOCASE, `longitude` REAL NOT NULL, `latitude` REAL NOT NULL)",
         "fields": [
           {
             "fieldPath": "locationId",
@@ -181,12 +179,6 @@
             "fieldPath": "latitude",
             "columnName": "latitude",
             "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "policyId",
-            "columnName": "policy_id",
-            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -222,25 +214,13 @@
             "createSql": "CREATE INDEX IF NOT EXISTS `index_Location_latitude` ON `${TABLE_NAME}` (`latitude`)"
           }
         ],
-        "foreignKeys": [
-          {
-            "table": "Policy",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "policy_id"
-            ],
-            "referencedColumns": [
-              "policy_id"
-            ]
-          }
-        ]
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cf5fff3a5ea45023d40d8ff8aab836e7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ba657924e07207062551928929cccf3')"
     ]
   }
 }
