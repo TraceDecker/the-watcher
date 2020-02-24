@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.thewatcher.model.repository;
 
 import android.app.Application;
+import android.content.pm.ApplicationInfo;
 import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
@@ -36,4 +37,5 @@ public class TheWatcherRepository {
 
     private static final TheWatcherRepository INSTANCE = new TheWatcherRepository();
   }
+
 }
