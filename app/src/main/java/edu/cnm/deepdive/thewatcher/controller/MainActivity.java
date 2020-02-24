@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.thewatcher.controller;
 
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -15,10 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import edu.cnm.deepdive.thewatcher.R;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
+
+  List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
