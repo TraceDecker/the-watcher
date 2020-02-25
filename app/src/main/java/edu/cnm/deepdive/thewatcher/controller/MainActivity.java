@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
 
-  List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
+//  List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
