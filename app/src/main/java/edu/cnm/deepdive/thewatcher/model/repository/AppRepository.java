@@ -34,10 +34,6 @@ public class AppRepository {
     return database.getAppDao().select();
   }
 
-  public LiveData<List<Policy>> getAllPolicies() {
-    return database.getPolicyDao().select();
-  }
-
   private static class InstanceHolder {
 
     private static final AppRepository INSTANCE = new AppRepository();
