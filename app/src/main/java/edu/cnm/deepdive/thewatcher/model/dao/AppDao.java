@@ -19,12 +19,6 @@ public interface AppDao {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   long insert(App app);
 
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
-  long insert(Policy policy);
-
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
-  long insert(Location location);
-
   @Delete
   Single<Integer>delete(App... apps);
 
