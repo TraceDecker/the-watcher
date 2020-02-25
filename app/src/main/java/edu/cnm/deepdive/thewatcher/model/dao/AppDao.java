@@ -20,7 +20,7 @@ public interface AppDao {
   long insert(App app);
 
   @Delete
-  Single<Integer>delete(App... apps);
+  Single<Integer> delete(App... apps);
 
   @Query("SELECT * FROM App ORDER BY app_name")
   LiveData<List<App>> select();
