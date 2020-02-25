@@ -2,6 +2,7 @@ package edu.cnm.deepdive.thewatcher.controller;
 
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
+import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
@@ -16,11 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import edu.cnm.deepdive.thewatcher.R;
+import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
+  private MainViewModel mainViewModel;
 
 //  List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
 
@@ -50,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
     NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
     NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     NavigationUI.setupWithNavController(navigationView, navController);
+
+    setupViewModel();
+  }
+
+  private void setupViewModel() {
+    mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
   }
 
   @Override
