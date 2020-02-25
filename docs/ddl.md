@@ -1,5 +1,6 @@
--- noinspection SqlNoDataSourceInspectionForFile
+# SQL data definition language (DDL)
 
+```SQLite
 CREATE TABLE IF NOT EXISTS `App`
 (
     `app_id`      INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -43,3 +44,6 @@ CREATE TABLE IF NOT EXISTS `Policy`
     FOREIGN KEY (`app_id`) REFERENCES `App` (`app_id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`) ON UPDATE NO ACTION ON DELETE CASCADE
 );
+```
+
+[Download](ddl.sql)
