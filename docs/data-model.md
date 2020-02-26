@@ -23,3 +23,11 @@
 * [PolicyRepository](https://github.com/TraceDecker/the-watcher/blob/master/app/src/main/java/edu/cnm/deepdive/thewatcher/model/repository/PolicyRepository.java)
 
 * [LocationRepository](https://github.com/TraceDecker/the-watcher/blob/master/app/src/main/java/edu/cnm/deepdive/thewatcher/model/repository/LocationRepository.java)
+
+### Database class
+
+* [TheWatcherDatabase](https://github.com/TraceDecker/the-watcher/blob/master/app/src/main/java/edu/cnm/deepdive/thewatcher/services/TheWatcherDatabase.java)
+
+### DDL
+
+* [DDL](ddl.md)
