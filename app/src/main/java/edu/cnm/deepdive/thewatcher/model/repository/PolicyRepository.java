@@ -31,15 +31,19 @@ public class PolicyRepository {
     return InstanceHolder.INSTANCE;
   }
 
+  public LiveData<List<Policy>> getPolicyByValue() {
+    return database.getPolicyDao().select();
+  }
+
   public LiveData<List<Policy>> getAllPolicies(App app, Location location) {
     return database.getPolicyDao().selectByAppAndLocation(app.getId(), location.getLocationId());
   }
 
-  private LiveData<List<Policy>> getAllPolicies(App app) {
+  public LiveData<List<Policy>> getAllPolicies(App app) {
     return database.getPolicyDao().selectByApp(app.getId());
   }
 
-  private LiveData<List<Policy>> getAllPolcies(Location location) {
+  public LiveData<List<Policy>> getAllPolcies(Location location) {
     return database.getPolicyDao().selectByLocation(location.getLocationId());
   }
 

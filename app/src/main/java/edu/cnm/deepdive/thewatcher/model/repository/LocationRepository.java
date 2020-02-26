@@ -4,6 +4,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
+import io.reactivex.Single;
 import java.util.List;
 
 public class LocationRepository {
@@ -31,6 +32,10 @@ public class LocationRepository {
 
   public LiveData<List<Location>> getAllLocations() {
     return database.getLocationDao().select();
+  }
+
+  public Single<Location> getLocationById(long locationId) {
+    return database.getLocationDao().getLocationById(locationId);
   }
 
 

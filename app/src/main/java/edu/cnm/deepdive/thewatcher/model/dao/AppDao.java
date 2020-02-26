@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.model.entity.Location;
@@ -26,10 +27,11 @@ public interface AppDao {
   @Query("SELECT * FROM App ORDER BY app_name")
   LiveData<List<App>> select();
 
+  @Transaction
   @Query("SELECT * FROM App ORDER BY app_name")
   LiveData<List<AppPolicies>> selectWithPolicies();
 
-  @Query("SELECT * FROM App ORDER BY app_name")
+  @Query("SELECT * FROM App WHERE app_id = :appId")
   Single<App> selectSingleByApp(long appId);
 
 }
