@@ -10,6 +10,7 @@ import androidx.room.Update;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.model.pojo.AppPolicies;
 import io.reactivex.Single;
 import java.util.List;
 
@@ -24,6 +25,12 @@ public interface AppDao {
 
   @Query("SELECT * FROM App ORDER BY app_name")
   LiveData<List<App>> select();
+
+  @Query("SELECT * FROM App ORDER BY app_name")
+  LiveData<List<AppPolicies>> selectWithPolicies();
+
+  @Query("SELECT * FROM App ORDER BY app_name")
+  Single<App> selectSingle();
 
   // TODO add "select" to get by id. return "single" type.
 

@@ -2,6 +2,8 @@ package edu.cnm.deepdive.thewatcher.model.repository;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
+import edu.cnm.deepdive.thewatcher.model.entity.App;
+import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import java.util.List;
@@ -29,7 +31,7 @@ public class PolicyRepository {
     return InstanceHolder.INSTANCE;
   }
 
-  public LiveData<List<Policy>> getAllPolicies() {
+  public LiveData<List<Policy>> getAllPolicies(App app, Location location) {
     return database.getPolicyDao().select();
   }
 

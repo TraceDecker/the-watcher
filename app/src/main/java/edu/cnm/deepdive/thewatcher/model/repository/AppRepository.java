@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
+import io.reactivex.Single;
 import java.util.List;
 
 public class AppRepository {
@@ -33,6 +34,12 @@ public class AppRepository {
   public LiveData<List<App>> getAllApps() {
     return database.getAppDao().select();
   }
+
+  public Single<App> getApp() {
+    return database.getAppDao().selectSingle();
+  }
+
+
 
   private static class InstanceHolder {
 
