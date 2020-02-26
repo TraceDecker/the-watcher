@@ -35,8 +35,8 @@ public class AppRepository {
     return database.getAppDao().select();
   }
 
-  public Single<App> getApp() {
-    return database.getAppDao().selectSingle();
+  public Single<App> getAppById(Policy policy) {
+    return database.getAppDao().selectSingleByApp(policy.getAppId());
   }
 
 

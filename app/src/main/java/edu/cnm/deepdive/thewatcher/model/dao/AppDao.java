@@ -30,8 +30,6 @@ public interface AppDao {
   LiveData<List<AppPolicies>> selectWithPolicies();
 
   @Query("SELECT * FROM App ORDER BY app_name")
-  Single<App> selectSingle();
-
-  // TODO add "select" to get by id. return "single" type.
+  Single<App> selectSingleByApp(long appId);
 
 }

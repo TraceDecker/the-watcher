@@ -27,5 +27,7 @@ public interface LocationDao {
   @Query("SELECT * FROM Location ORDER BY location_name")
   LiveData<List<Location>> select();
 
+  @Query("SELECT * FROM Location WHERE location_id = :locationId")
+  Single<Location> getLocationById(long locationId);
 
 }
