@@ -33,7 +33,7 @@ _This app would be for:_
 
 ## External Services
 
-* [Mapbox](https://docs.mapbox.com/api/maps/) - Mapping Service.
+* [Mapbox](https://docs.mapbox.com/api/maps/) - Mapping Service for pin dropping.
 
 * Mapbox [Forward Geocoding](https://docs.mapbox.com/api/search/#geocoding) - Allows the user to search for desired locations for pin dropping.
 
@@ -41,10 +41,12 @@ _This app would be for:_
 
 * [DeviceAdminService](https://developer.android.com/reference/android/app/admin/DeviceAdminService?hl=en) - Allows the app to always run in the background, it also has the ability to disable/enable its own service. MUST use protected Permissions, otherwise device will ignore it.
 
-* App will require location to function properly and internet connection to search for new locations for pins.
+* App will require location and internet connection to function properly.
 
 ## Design Documentation
 
 ### [Wireframe](wireframe.md)
 
 ### [Entity-relationship diagram](erd.md)
+
+### [Data model implementation](data-model.md)
