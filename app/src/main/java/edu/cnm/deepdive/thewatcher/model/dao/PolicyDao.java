@@ -24,7 +24,15 @@ public interface PolicyDao {
   @Delete
   Single<Integer> delete(Policy... policies);
 
-  @Query("SELECT * FROM Policy ORDER BY app_id")
+  @Query("SELECT * FROM Policy ORDER BY time_value")
   LiveData<List<Policy>> select();
 
+  @Query("SELECT * FROM Policy WHERE app_id = :appId AND location_id = :locationId")
+  LiveData<List<Policy>> selectByAppAndLocation(long appId, long locationId);
+
+  @Query("SELECT * FROM Policy WHERE app_id = :appId")
+  LiveData<List<Policy>> selectByApp(long appId);
+
+  @Query("SELECT * FROM Policy WHERE location_id = :locationId")
+  LiveData<List<Policy>> selectByLocation(long locationId);
 }
