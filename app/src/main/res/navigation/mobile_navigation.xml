@@ -12,16 +12,16 @@
     tools:layout="@layout/fragment_home"/>
 
   <fragment
-    android:id="@+id/nav_gallery"
-    android:label="@string/menu_gallery"
-    android:name="edu.cnm.deepdive.thewatcher.controller.ui.gallery.GalleryFragment"
-    tools:layout="@layout/fragment_gallery"/>
+    android:id="@+id/nav_pins"
+    android:label="@string/menu_pins"
+    android:name="edu.cnm.deepdive.thewatcher.controller.ui.pins.PinsFragment"
+    tools:layout="@layout/fragment_pins"/>
 
   <fragment
-    android:id="@+id/nav_slideshow"
-    android:label="@string/menu_slideshow"
-    android:name="edu.cnm.deepdive.thewatcher.controller.ui.slideshow.SlideshowFragment"
-    tools:layout="@layout/fragment_slideshow"/>
+    android:id="@+id/nav_restrictions"
+    android:label="@string/menu_restrictions"
+    android:name="edu.cnm.deepdive.thewatcher.controller.ui.restrictions.RestrictionsFragment"
+    tools:layout="@layout/fragment_restrictions"/>
 
   <fragment
     android:id="@+id/nav_tools"
@@ -29,15 +29,5 @@
     android:name="edu.cnm.deepdive.thewatcher.controller.ui.tools.ToolsFragment"
     tools:layout="@layout/fragment_tools"/>
 
-  <fragment
-    android:id="@+id/nav_share"
-    android:label="@string/menu_share"
-    android:name="edu.cnm.deepdive.thewatcher.controller.ui.share.ShareFragment"
-    tools:layout="@layout/fragment_share"/>
 
-  <fragment
-    android:id="@+id/nav_send"
-    android:label="@string/menu_send"
-    android:name="edu.cnm.deepdive.thewatcher.controller.ui.send.SendFragment"
-    tools:layout="@layout/fragment_send"/>
 </navigation>

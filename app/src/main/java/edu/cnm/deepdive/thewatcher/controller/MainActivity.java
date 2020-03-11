@@ -2,6 +2,8 @@ package edu.cnm.deepdive.thewatcher.controller;
 
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -19,6 +21,7 @@ import android.view.Menu;
 import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,20 +49,20 @@ public class MainActivity extends AppCompatActivity {
     // Passing each menu ID as a set of Ids because each
     // menu should be considered as top level destinations.
     mAppBarConfiguration = new AppBarConfiguration.Builder(
-        R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-        R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+        R.id.nav_home, R.id.nav_pins, R.id.nav_restrictions,
+        R.id.nav_tools)
         .setDrawerLayout(drawer)
         .build();
     NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
     NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     NavigationUI.setupWithNavController(navigationView, navController);
-
     setupViewModel();
   }
 
   private void setupViewModel() {
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+    List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
   }
 
   @Override

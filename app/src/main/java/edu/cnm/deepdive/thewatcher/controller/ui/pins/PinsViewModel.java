@@ -1,16 +1,16 @@
-package edu.cnm.deepdive.thewatcher.controller.ui.slideshow;
+package edu.cnm.deepdive.thewatcher.controller.ui.pins;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class PinsViewModel extends ViewModel {
 
   private MutableLiveData<String> mText;
 
-  public SlideshowViewModel() {
+  public PinsViewModel() {
     mText = new MutableLiveData<>();
-    mText.setValue("This is slideshow fragment");
+    mText.setValue("This is pins fragment");
   }
 
   public LiveData<String> getText() {

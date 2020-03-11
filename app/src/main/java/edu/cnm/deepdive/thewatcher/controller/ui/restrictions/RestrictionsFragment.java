@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.thewatcher.controller.ui.share;
+package edu.cnm.deepdive.thewatcher.controller.ui.restrictions;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,17 +12,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import edu.cnm.deepdive.thewatcher.R;
 
-public class ShareFragment extends Fragment {
+public class RestrictionsFragment extends Fragment {
 
-  private ShareViewModel shareViewModel;
+  private RestrctionsViewModel restrctionsViewModel;
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
-    shareViewModel =
-        ViewModelProviders.of(this).get(ShareViewModel.class);
-    View root = inflater.inflate(R.layout.fragment_share, container, false);
-    final TextView textView = root.findViewById(R.id.text_share);
-    shareViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    restrctionsViewModel =
+        ViewModelProviders.of(this).get(RestrctionsViewModel.class);
+    View root = inflater.inflate(R.layout.fragment_restrictions, container, false);
+    final TextView textView = root.findViewById(R.id.text_restrictions);
+    restrctionsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
       @Override
       public void onChanged(@Nullable String s) {
         textView.setText(s);

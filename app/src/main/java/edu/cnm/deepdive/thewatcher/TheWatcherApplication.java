@@ -20,6 +20,7 @@ public class TheWatcherApplication extends Application {
     LocationRepository.setContext(this);
 
     TheWatcherDatabase.setContext(this);
+    // FIXME remove this line once database access from fragments.
     TheWatcherDatabase.getInstance().getAppDao().delete().subscribeOn(Schedulers.io()).subscribe();
   }
 
