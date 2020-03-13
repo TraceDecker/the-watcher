@@ -18,11 +18,28 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
+  <com.google.android.gms.maps.MapView
+    android:id="@+id/pins_map"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_margin="10dp"
+    app:layout_constraintTop_toBottomOf="@id/text_pins"
+    app:layout_constraintBottom_toTopOf="@id/pins_list"/>
+
+  <ListView
+    android:id="@+id/pins_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:layout_constraintTop_toBottomOf="@id/pins_map"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
   <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Pins List"
-    app:layout_constraintTop_toBottomOf="@id/text_pins"
+    android:text="Next"
+    app:layout_constraintTop_toBottomOf="@id/pins_list"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>

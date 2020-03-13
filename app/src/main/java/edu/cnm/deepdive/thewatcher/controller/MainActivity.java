@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
   private AppBarConfiguration mAppBarConfiguration;
   private MainViewModel mainViewModel;
 
-//  List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -60,12 +58,13 @@ public class MainActivity extends AppCompatActivity {
     NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     NavigationUI.setupWithNavController(navigationView, navController);
     setupViewModel();
-    ActivityCompat.requestPermissions(this ,new String[]{permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
   }
 
   private void setupViewModel() {
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+    ActivityCompat.requestPermissions(this ,new String[]{permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
 
     List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
   }
@@ -83,4 +82,5 @@ public class MainActivity extends AppCompatActivity {
     return NavigationUI.navigateUp(navController, mAppBarConfiguration)
         || super.onSupportNavigateUp();
   }
+
 }
