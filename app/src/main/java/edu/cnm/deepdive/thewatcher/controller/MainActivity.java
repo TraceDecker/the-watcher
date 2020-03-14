@@ -2,35 +2,32 @@ package edu.cnm.deepdive.thewatcher.controller;
 
 import android.Manifest;
 import android.Manifest.permission;
-import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-import com.google.android.gms.maps.MapView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
 import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.view.Menu;
 import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
-import java.util.List;
-import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
   private MainViewModel mainViewModel;
+
+  private static final String[] INITIAL_PERMS = {
+      Manifest.permission.ACCESS_FINE_LOCATION,
+      permission.READ_EXTERNAL_STORAGE
+  };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +36,12 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     FloatingActionButton fab = findViewById(R.id.fab);
+
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
 
         setContentView(R.layout.activity_app_select);
-
-//        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//            .setAction("Action", null).show();
       }
     });
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -62,13 +57,16 @@ public class MainActivity extends AppCompatActivity {
     NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     NavigationUI.setupWithNavController(navigationView, navController);
     setupViewModel();
+
+    // does this go here?
+    ActivityCompat.requestPermissions(this, INITIAL_PERMS, 0);
   }
 
   private void setupViewModel() {
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-    ActivityCompat.requestPermissions(this ,new String[]{permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+// not sure if this is doing the same thing as above.
+//    ActivityCompat.requestPermissions(this ,new String[]{permission.ACCESS_FINE_LOCATION,
+//        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
   }
 
   @Override

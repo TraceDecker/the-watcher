@@ -27,15 +27,16 @@ public class LoginActivity extends AppCompatActivity {
           setContentView(R.layout.activity_login);
           findViewById(R.id.sign_in).setOnClickListener((v) ->
               repository.startSignIn(this, LOGIN_REQUEST_CODE));
-        });
-    Button button = findViewById(R.id.new_user);
-    button.setOnClickListener(new View.OnClickListener() {
+          Button button = findViewById(R.id.new_user);
+          button.setOnClickListener(new View.OnClickListener() {
 
-      @Override
-      public void onClick(View v) {
-        setContentView(R.layout.activity_user_creation);
-      }
-    });
+            @Override
+            public void onClick(View v) {
+              setContentView(R.layout.activity_user_creation);
+            }
+          });
+        });
+
   }
 
 

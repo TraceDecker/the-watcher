@@ -20,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,8 +44,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     super.onCreate(savedInstanceState);
 
     requestPermissions(INITIAL_PERMS, 0);
-
-
 
 //    fusedLocationProvider = LocationServices.getFusedLocationProviderClient(getActivity());
   }
@@ -108,9 +107,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
   @Override
   public void onMapReady(GoogleMap googleMap) {
     map = googleMap;
+
     map.setMyLocationEnabled(true);
-    map.addMarker(new MarkerOptions().position(new LatLng(35.089550, -106.504158)).title("Marker"));
-    map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.089550, -106.504158)));
+
+//    map.setMyLocationEnabled(true);
+//    map.addMarker(new MarkerOptions().position(new LatLng(35.089550, -106.504158)).title("Marker"));
+//    map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.089550, -106.504158)));
 
 //    map = googleMap;
 //    map.setMyLocationEnabled(true);
