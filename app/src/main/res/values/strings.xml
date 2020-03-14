@@ -14,4 +14,16 @@
   <string name="menu_tools">Tools</string>
   <string name="menu_share">Share</string>
   <string name="menu_send">Send</string>
+  <string name="app_select_description">Select the apps you want to restrict.</string>
+  <string name="next_button_text">NEXT</string>
+  <string name="welcome_text">Welcome! What is your name?</string>
+  <string name="username_prompt_text">What should I call you?</string>
+  <string name="hint_name">Name</string>
+  <string name="hint_username">Username</string>
+  <string name="email_prompt_text">What\'s your email?</string>
+  <string name="hint_email">Email</string>
+  <string name="login_failure">Could not login.</string>
+  <string name="your_productivity">Your productivty awaits...</string>
+  <string name="new_user">New User</string>
+  <string name="the_watcher">The Watcher</string>
 </resources>

@@ -36,7 +36,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
-      Manifest.permission.READ_CONTACTS
   };
 
   @Override
@@ -45,18 +44,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     requestPermissions(INITIAL_PERMS, 0);
 
-    fusedLocationProvider = LocationServices.getFusedLocationProviderClient(getActivity());
+
+
+//    fusedLocationProvider = LocationServices.getFusedLocationProviderClient(getActivity());
   }
 // not sure about this.
-  private void getLastLocation() {
-    fusedLocationProvider.getLastLocation().addOnCompleteListener(
-        new OnCompleteListener<Location>() {
-          @Override
-          public void onComplete(@NonNull Task<Location> task) {
-
-          }
-        });
-  }
+//  private void getLastLocation() {
+//    fusedLocationProvider.getLastLocation().addOnCompleteListener(
+//        new OnCompleteListener<Location>() {
+//          @Override
+//          public void onComplete(@NonNull Task<Location> task) {
+//
+//          }
+//        });
+//  }
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
