@@ -100,10 +100,13 @@ public class PinsFragment extends Fragment implements OnMapReadyCallback {
 
   private void addPins() {
     List<Location> locs = mainViewModel.getLocations().getValue();
-    for (Location loc: locs) {
-      pinsMap.addMarker(new MarkerOptions()
-          .position(new LatLng(loc.getLatitude(), loc.getLongitude()))
-          .title(loc.getLocationName()));
+
+    if (locs != null) {
+      for (Location loc: locs) {
+        pinsMap.addMarker(new MarkerOptions()
+            .position(new LatLng(loc.getLatitude(), loc.getLongitude()))
+            .title(loc.getLocationName()));
+      }
     }
   }
 

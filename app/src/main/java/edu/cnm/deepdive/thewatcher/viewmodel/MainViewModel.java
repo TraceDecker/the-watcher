@@ -33,15 +33,15 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     locations = new MutableLiveData<>();
   }
 
-  public MutableLiveData<List<App>> getApps() {
-    return apps;
+  public LiveData<List<App>> getApps() {
+    return appRepository.getAllApps();
   }
 
-  public MutableLiveData<List<Policy>> getPolicies() {
-    return policies;
+  public LiveData<List<Policy>> getPolicies() {
+    return policyRepository.getPolicyByValue();
   }
 
-  public MutableLiveData<List<Location>> getLocations() {
-    return locations;
+  public LiveData<List<Location>> getLocations() {
+    return locationRepository.getAllLocations();
   }
 }
