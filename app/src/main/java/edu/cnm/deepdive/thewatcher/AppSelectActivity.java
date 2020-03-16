@@ -38,8 +38,8 @@ public class AppSelectActivity extends AppCompatActivity {
     setContentView(R.layout.activity_app_select);
     imageView = (ImageView) findViewById(R.id.image_test);
 
-    requestPermissions(INITIAL_PERMS, 1);
-    installedApps();
+   // requestPermissions(INITIAL_PERMS, 1);
+   // installedApps();
   }
 
   public void installedApps() {

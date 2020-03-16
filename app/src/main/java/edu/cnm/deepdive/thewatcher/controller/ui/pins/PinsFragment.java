@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.thewatcher.controller.ui.pins;
 
 import android.Manifest;
+import android.Manifest.permission;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,16 +21,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import edu.cnm.deepdive.thewatcher.R;
+import edu.cnm.deepdive.thewatcher.model.entity.Location;
+import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
+import java.util.List;
 
 public class PinsFragment extends Fragment implements OnMapReadyCallback {
 
-  private PinsViewModel pinsViewModel;
+  private MainViewModel mainViewModel;
   private MapView mapView;
   private GoogleMap pinsMap;
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
-      Manifest.permission.READ_CONTACTS
+      permission.READ_EXTERNAL_STORAGE
   };
 
   @Override
@@ -39,17 +45,11 @@ public class PinsFragment extends Fragment implements OnMapReadyCallback {
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
-    pinsViewModel =
-        ViewModelProviders.of(this).get(PinsViewModel.class);
+    mainViewModel =
+        ViewModelProviders.of(this).get(MainViewModel.class);
     View root = inflater.inflate(R.layout.fragment_pins, container, false);
     final TextView textView = root.findViewById(R.id.text_pins);
     final MapView mapView = root.findViewById(R.id.pins_map);
-    pinsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-      @Override
-      public void onChanged(@Nullable String s) {
-        textView.setText(s);
-      }
-    });
     return root;
   }
 
@@ -85,10 +85,26 @@ public class PinsFragment extends Fragment implements OnMapReadyCallback {
   @Override
   public void onMapReady(GoogleMap googleMap) {
     pinsMap = googleMap;
-    pinsMap.setMyLocationEnabled(true);
-    pinsMap.addMarker(new MarkerOptions()
-        .position(new LatLng(35.089550, -106.504158)).title("Marker"));
-    pinsMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.089550, -106.504158)));
+    if (ContextCompat.checkSelfPermission(getContext(),
+        permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      requestPermissions(INITIAL_PERMS, 0);
+    } else {
+      pinsMap.setMyLocationEnabled(true);
+    }
+    addPins();
+
+//    pinsMap.addMarker(new MarkerOptions()
+//        .position(new LatLng(35.089550, -106.504158)).title("Marker"));
+//    pinsMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.089550, -106.504158)));
+  }
+
+  private void addPins() {
+    List<Location> locs = mainViewModel.getLocations().getValue();
+    for (Location loc: locs) {
+      pinsMap.addMarker(new MarkerOptions()
+          .position(new LatLng(loc.getLatitude(), loc.getLongitude()))
+          .title(loc.getLocationName()));
+    }
   }
 
   @Override

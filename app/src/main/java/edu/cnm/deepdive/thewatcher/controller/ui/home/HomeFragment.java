@@ -1,7 +1,8 @@
 package edu.cnm.deepdive.thewatcher.controller.ui.home;
 
 import android.Manifest;
-import android.location.Location;
+import android.Manifest.permission;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,28 +10,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.controller.MainActivity;
-import java.util.Objects;
+import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
-  private HomeViewModel homeViewModel;
+  private MainViewModel mainViewModel;
   private MapView mapView;
   private GoogleMap map;
   private FusedLocationProviderClient fusedLocationProvider;
@@ -61,17 +54,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
 
-    homeViewModel =
-        ViewModelProviders.of(this).get(HomeViewModel.class);
+    mainViewModel =
+        ViewModelProviders.of(this).get(MainViewModel.class);
     View root = inflater.inflate(R.layout.fragment_home, container, false);
     final TextView textView = root.findViewById(R.id.text_home);
     final MapView mapView = root.findViewById(R.id.map);
-    homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-      @Override
-      public void onChanged(@Nullable String s) {
-        textView.setText(s);
-      }
-    });
     return root;
   }
 
@@ -108,7 +95,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
   public void onMapReady(GoogleMap googleMap) {
     map = googleMap;
 
-    map.setMyLocationEnabled(true);
+    if (ContextCompat.checkSelfPermission(getContext(),
+        permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      requestPermissions(INITIAL_PERMS, 1);
+    } else {
+      map.setMyLocationEnabled(true);
+    }
 
 //    map.setMyLocationEnabled(true);
 //    map.addMarker(new MarkerOptions().position(new LatLng(35.089550, -106.504158)).title("Marker"));

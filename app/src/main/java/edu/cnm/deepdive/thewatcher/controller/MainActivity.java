@@ -26,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
-      permission.READ_EXTERNAL_STORAGE
+      Manifest.permission.READ_EXTERNAL_STORAGE,
+      Manifest.permission.ACCESS_COARSE_LOCATION
   };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ActivityCompat.requestPermissions(this, INITIAL_PERMS, 0);
     setContentView(R.layout.activity_main);
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     setupViewModel();
 
     // does this go here?
-    ActivityCompat.requestPermissions(this, INITIAL_PERMS, 0);
+
   }
 
   private void setupViewModel() {
