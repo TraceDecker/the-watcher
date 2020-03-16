@@ -27,10 +27,6 @@ public class AppSelectActivity extends AppCompatActivity {
   private ImageView imageView;
   private Drawable appIcon;
 
-  private static final String[] INITIAL_PERMS = {
-      permission.READ_EXTERNAL_STORAGE
-  };
-
   @RequiresApi(api = VERSION_CODES.M)
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +34,6 @@ public class AppSelectActivity extends AppCompatActivity {
     setContentView(R.layout.activity_app_select);
     imageView = (ImageView) findViewById(R.id.image_test);
 
-   // requestPermissions(INITIAL_PERMS, 1);
    // installedApps();
   }
 

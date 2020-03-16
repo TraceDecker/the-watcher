@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import edu.cnm.deepdive.thewatcher.AppSelectFragment;
 import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 
@@ -43,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
 
-        setContentView(R.layout.activity_app_select);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+            .add(R.id.fragment_container, new AppSelectFragment(), null)
+            .addToBackStack(AppSelectFragment.class.getName())
+            .commit();
       }
     });
     DrawerLayout drawer = findViewById(R.id.drawer_layout);

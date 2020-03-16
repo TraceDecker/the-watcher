@@ -26,4 +26,7 @@
   <string name="your_productivity">Your productivty awaits...</string>
   <string name="new_user">New User</string>
   <string name="the_watcher">The Watcher</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
