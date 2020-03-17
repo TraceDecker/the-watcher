@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.thewatcher.model.dao;
 
+import android.provider.LiveFolders;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -21,10 +22,13 @@ public interface AppDao {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   long insert(App app);
 
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  void insert(List<App> appsList);
+
   @Delete
   Single<Integer> delete(App... apps);
 
-  @Query("SELECT * FROM App ORDER BY app_name")
+  @Query("SELECT * FROM App")
   LiveData<List<App>> select();
 
   @Transaction

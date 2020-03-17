@@ -32,7 +32,9 @@ public class AppRepository {
   }
 
   public LiveData<List<App>> getAllApps() {
-    return database.getAppDao().select();
+
+    LiveData<List<App>> apps = database.getAppDao().select();
+    return apps;
   }
 
   public Single<App> getAppById(Policy policy) {

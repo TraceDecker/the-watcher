@@ -19,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import edu.cnm.deepdive.thewatcher.AppSelectFragment;
 import edu.cnm.deepdive.thewatcher.R;
+import edu.cnm.deepdive.thewatcher.services.PackService;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     setupViewModel();
 
     // does this go here?
+    PackService service = new PackService(getApplicationContext());
+    service.getAppsFromDevice();
 
   }
 

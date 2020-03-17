@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.thewatcher.model.entity;
 
+import android.graphics.drawable.Drawable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -26,6 +27,7 @@ public class App {
   @ColumnInfo(name = "app_package", collate = ColumnInfo.NOCASE)
   private String appPackage;
 
+
   public long getId() {
     return id;
   }
@@ -49,4 +51,5 @@ public class App {
   public void setAppPackage(String appPackage) {
     this.appPackage = appPackage;
   }
+
 }
