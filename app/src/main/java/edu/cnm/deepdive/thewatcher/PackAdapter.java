@@ -25,6 +25,7 @@ public class PackAdapter extends BaseAdapter {
   public PackAdapter(List<App> apps, Context context) {
     this.apps = apps;
     this.context = context;
+    manager = context.getPackageManager();
   }
 
   @Override
@@ -57,7 +58,7 @@ public class PackAdapter extends BaseAdapter {
 
 //    imageView.setImageDrawable(context.getDrawable(R.drawable.amu_bubble_mask));
     try {
-      imageView.setImageDrawable(manager.getApplicationIcon("com.google"));
+      imageView.setImageDrawable(manager.getApplicationIcon(app.getAppPackage()));
     } catch (NameNotFoundException e) {
       e.printStackTrace();
     }
