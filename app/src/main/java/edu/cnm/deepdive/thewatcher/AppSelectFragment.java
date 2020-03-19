@@ -79,7 +79,7 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   public void onClick(View view) {
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
     fragmentManager.beginTransaction()
-        .add(R.id.fragment_container, new SelectedAppsFragment(), null)
+        .add(R.id.fragment_container, new SelectedAppsFragment(selectedApps), null)
         .addToBackStack(AppSelectFragment.class.getName())
         .commit();
   }
