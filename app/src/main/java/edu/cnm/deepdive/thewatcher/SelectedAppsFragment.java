@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import edu.cnm.deepdive.thewatcher.model.SelectedAppRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.List;
@@ -21,6 +23,7 @@ public class SelectedAppsFragment extends Fragment {
 
   private List<App> selectedApps;
   private MainViewModel viewModel;
+  private RecyclerView recyclerView;
 
   public SelectedAppsFragment() {
     // Required empty public constructor
@@ -36,6 +39,7 @@ public class SelectedAppsFragment extends Fragment {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_selected_apps, container, false);
     selectedApps = view.findViewById(R.id.apps_selected);
+    recyclerView = view.findViewById(R.id.apps_selected);
     return view;
   }
 
@@ -43,10 +47,10 @@ public class SelectedAppsFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-    viewModel.getApps().observe(getViewLifecycleOwner(), (app) -> {
-      SelectedAppsAdapter adapter = new SelectedAppsAdapter(getContext(), app);
+    viewModel.getApps().observe(getViewLifecycleOwner(), (App) -> {
+      SelectedAppRecyclerAdapter adapter = new SelectedAppRecyclerAdapter(getContext(), selectedApps);
+    });
       // Im not sure why this line doesnt work.
       // selectedApps.setAdapter(adapter);
-    });
   }
 }
