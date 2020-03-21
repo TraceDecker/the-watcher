@@ -6,8 +6,9 @@
   android:layout_width="300dp"
   android:layout_height="175dp"
   android:layout_gravity="center"
+  android:layout_centerInParent="true"
   tools:context=".selectTimeFragment"
-  app:layout_anchorGravity="center">
+  android:background="@color/colorSelectBackground">
 
   <TextView
     android:layout_width="match_parent"
