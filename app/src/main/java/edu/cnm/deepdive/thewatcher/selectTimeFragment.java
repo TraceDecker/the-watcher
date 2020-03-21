@@ -3,6 +3,7 @@ package edu.cnm.deepdive.thewatcher;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.fragment.app.FragmentManager;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.selectTimeFragment.OnFragmentInteractionListener;
 
@@ -20,6 +22,7 @@ import edu.cnm.deepdive.thewatcher.selectTimeFragment.OnFragmentInteractionListe
  */
 public class selectTimeFragment extends Fragment implements OnClickListener {
 
+  private static final String TAG = "";
   private OnFragmentInteractionListener mListener;
   private App app;
   private View view;
@@ -40,16 +43,24 @@ public class selectTimeFragment extends Fragment implements OnClickListener {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
+    View view = inflater.inflate(R.layout.fragment_select_time, container, false);
     timeValue = view.findViewById(R.id.time_value);
     button = view.findViewById(R.id.set_restriction_button);
     button.setOnClickListener(this);
-    return inflater.inflate(R.layout.fragment_select_time, container, false);
+    return view;
   }
 
   @Override
-  public void onClick(View view) {
-    restriction = Long.parseLong(timeValue.getText().toString().trim());
-
+  public void onClick(View view) throws NumberFormatException{
+// attempting to hide selectTimeFragment.
+    try {
+      restriction = Long.parseLong(timeValue.getText().toString().trim());
+    } catch (NumberFormatException e) {
+      Log.d(TAG, "onClick: No input");
+    }
+    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+    fragmentManager.beginTransaction()
+        .hide(fragmentManager.findFragmentById(R.id.set_restriction_fragment));
   }
 
   /**

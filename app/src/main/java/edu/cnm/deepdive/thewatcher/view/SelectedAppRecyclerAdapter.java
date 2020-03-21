@@ -3,6 +3,8 @@ package edu.cnm.deepdive.thewatcher.view;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,43 +13,42 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter.Holder;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
   private final PackageManager manager;
   private final List<App> selectedApps;
-  private OnAppListener onAppListener;
-  private final Map<Integer, Class<? extends ViewHolder>> holders;
+  private final OnAppListener onAppListener;
+  private final int[] durations;
+  private int selectedItem;
 
 
   public SelectedAppRecyclerAdapter(Context context, List<App> selectedApps, OnAppListener onAppListener) {
     this.context = context;
     this.selectedApps = selectedApps;
     this.onAppListener = onAppListener;
-    holders = new HashMap<>();
+    selectedItem = -1;
     manager = context.getPackageManager();
+    durations = new int[selectedApps.size()];
   }
 
   @NonNull
   @Override
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-      View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.app_item, parent, false);
-      return new Holder(root, onAppListener);
+      View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.selected_app_item, parent, false);
+      return new Holder(root);
   }
 
   @Override
   public void onBindViewHolder(@NonNull Holder holder, int position) {
     try {
-      holder.bind(0, selectedApps.get(position), manager);
+      holder.bind(position, selectedApps.get(position));
     } catch (NameNotFoundException e) {
       Log.e(getClass().getName(), e.getMessage(), e);
     }
@@ -58,29 +59,63 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     return selectedApps.size();
   }
 
-  static class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
+  private void setSelectedItem(int selectedItem) {
+    this.selectedItem = selectedItem;
+  }
 
-    public final ImageView icon;
-    public final TextView appName;
-    OnAppListener onAppListener;
+  class Holder extends RecyclerView.ViewHolder implements TextWatcher {
+
+    private final ImageView icon;
+    private final TextView appName;
+    private final TextView timeValue;
+    private final View timeLayout;
+    private boolean selected;
 
 
-    private Holder(@NonNull View itemView, OnAppListener onAppListener) {
+    private Holder(@NonNull View itemView) {
       super(itemView);
       icon = itemView.findViewById(R.id.icon);
       appName = itemView.findViewById(R.id.app_name);
-      this.onAppListener = onAppListener;
-      itemView.setOnClickListener(this);
+      timeLayout = itemView.findViewById(R.id.time_layout);
+      timeValue = itemView.findViewById(R.id.time_value);
+      timeValue.addTextChangedListener(this);
     }
 
-    private void bind(int position, App app, PackageManager manager) throws NameNotFoundException {
+    private void bind(int position, App app) throws NameNotFoundException {
       icon.setImageDrawable(manager.getApplicationIcon(app.getAppPackage()));
      appName.setText(appName.getText());
+     timeValue.setText(Integer.toString(durations[position]));
+     setSelected(position == selectedItem);
+      itemView.setOnClickListener((v) -> {
+        if (!selected) {
+          setSelected(true);
+          int deselected = selectedItem;
+          selectedItem = getAdapterPosition();
+          notifyItemChanged(deselected);
+        }
+//        onAppListener.onAppClick(getAdapterPosition());
+      });
+    }
+
+    private void setSelected(boolean selected) {
+      this.selected = selected;
+      timeLayout.setVisibility(selected ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void onClick(View v) {
-      onAppListener.onAppClick(getAdapterPosition());
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+      String entry = timeValue.getText().toString().trim();
+      durations[getAdapterPosition()] = (!entry.isEmpty()) ? Integer.parseInt(entry) : 0;
     }
   }
 

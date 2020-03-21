@@ -29,6 +29,7 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener,
   private List<App> selectedApps;
   private  MainViewModel viewModel;
   private RecyclerView recyclerView;
+  private SelectedAppRecyclerAdapter adapter;
   private App app;
 
   public SelectedAppsFragment() {
@@ -55,7 +56,7 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener,
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-    SelectedAppRecyclerAdapter adapter = new SelectedAppRecyclerAdapter(getContext(), selectedApps, this);
+    adapter = new SelectedAppRecyclerAdapter(getContext(), selectedApps, this);
     recyclerView.setAdapter(adapter);
   }
 
