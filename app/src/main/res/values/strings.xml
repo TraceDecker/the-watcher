@@ -31,6 +31,6 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="apps_selected_prompt">Select how much access you want for each app</string>
   <string name="amount_of_time_prompt">Enter how much time you want to have access to this app.</string>
-  <string name="time_hint">Time</string>
+  <string name="time_hint">Minutes</string>
   <string name="set_restriction">SET RESTRICTION</string>
 </resources>

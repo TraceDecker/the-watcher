@@ -1,18 +1,15 @@
-package edu.cnm.deepdive.thewatcher;
+package edu.cnm.deepdive.thewatcher.view;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.widget.ImageViewCompat;
+import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import java.util.List;
 
@@ -51,7 +48,7 @@ public class PackAdapter extends BaseAdapter {
       convertView = layoutInflater.inflate(R.layout.app_item, null);
     }
     final ImageView imageView =
-        convertView.findViewById(R.id.icons);
+        convertView.findViewById(R.id.icon);
 
     final TextView textView =
         convertView.findViewById(R.id.app_name);

@@ -2,6 +2,7 @@ package edu.cnm.deepdive.thewatcher.controller;
 
 import android.Manifest;
 import android.Manifest.permission;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -19,10 +20,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import edu.cnm.deepdive.thewatcher.AppSelectFragment;
 import edu.cnm.deepdive.thewatcher.R;
+import edu.cnm.deepdive.thewatcher.selectTimeFragment.OnFragmentInteractionListener;
 import edu.cnm.deepdive.thewatcher.services.PackService;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
   private AppBarConfiguration mAppBarConfiguration;
   private MainViewModel mainViewModel;
@@ -94,4 +96,8 @@ public class MainActivity extends AppCompatActivity {
         || super.onSupportNavigateUp();
   }
 
+  @Override
+  public void onFragmentInteraction(Uri uri) {
+
+  }
 }

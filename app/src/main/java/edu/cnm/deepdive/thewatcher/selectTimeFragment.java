@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import edu.cnm.deepdive.thewatcher.model.entity.App;
+import edu.cnm.deepdive.thewatcher.selectTimeFragment.OnFragmentInteractionListener;
 
 
 /**
@@ -19,6 +21,10 @@ public class selectTimeFragment extends Fragment {
 
   public selectTimeFragment() {
     // Required empty public constructor
+  }
+
+  public selectTimeFragment(App app) {
+
   }
 
 
@@ -39,12 +45,12 @@ public class selectTimeFragment extends Fragment {
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
-    if (context instanceof OnFragmentInteractionListener) {
-      mListener = (OnFragmentInteractionListener) context;
-    } else {
-      throw new RuntimeException(context.toString()
-          + " must implement OnFragmentInteractionListener");
-    }
+//    if (context instanceof OnFragmentInteractionListener) {
+//      mListener = (OnFragmentInteractionListener) context;
+//    } else {
+//      throw new RuntimeException(context.toString()
+//          + " must implement OnFragmentInteractionListener");
+//    }
   }
 
   @Override
