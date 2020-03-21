@@ -3,6 +3,9 @@ package edu.cnm.deepdive.thewatcher;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +18,21 @@ import edu.cnm.deepdive.thewatcher.selectTimeFragment.OnFragmentInteractionListe
  * A simple {@link Fragment} subclass. Activities that contain this fragment must implement the
  * {@link selectTimeFragment.OnFragmentInteractionListener} interface to handle interaction events.
  */
-public class selectTimeFragment extends Fragment {
+public class selectTimeFragment extends Fragment implements OnClickListener {
 
   private OnFragmentInteractionListener mListener;
+  private App app;
+  private View view;
+  private long restriction;
+  Button button;
+  EditText timeValue;
 
   public selectTimeFragment() {
     // Required empty public constructor
   }
 
   public selectTimeFragment(App app) {
-
+    this.app = app;
   }
 
 
@@ -32,31 +40,16 @@ public class selectTimeFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
+    timeValue = view.findViewById(R.id.time_value);
+    button = view.findViewById(R.id.set_restriction_button);
+    button.setOnClickListener(this);
     return inflater.inflate(R.layout.fragment_select_time, container, false);
   }
 
-  // TODO: Rename method, update argument and hook method into UI event
-  public void onButtonPressed(Uri uri) {
-    if (mListener != null) {
-      mListener.onFragmentInteraction(uri);
-    }
-  }
-
   @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-//    if (context instanceof OnFragmentInteractionListener) {
-//      mListener = (OnFragmentInteractionListener) context;
-//    } else {
-//      throw new RuntimeException(context.toString()
-//          + " must implement OnFragmentInteractionListener");
-//    }
-  }
+  public void onClick(View view) {
+    restriction = Long.parseLong(timeValue.getText().toString().trim());
 
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    mListener = null;
   }
 
   /**

@@ -23,12 +23,13 @@ import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.List;
 
 
-public class SelectedAppsFragment extends Fragment implements OnItemClickListener, OnClickListener,
+public class SelectedAppsFragment extends Fragment implements OnClickListener,
     OnAppListener {
 
   private List<App> selectedApps;
   private  MainViewModel viewModel;
   private RecyclerView recyclerView;
+  private App app;
 
   public SelectedAppsFragment() {
     // Required empty public constructor
@@ -37,6 +38,7 @@ public class SelectedAppsFragment extends Fragment implements OnItemClickListene
 
   public SelectedAppsFragment(List<App> selectedApps) {
     this.selectedApps = selectedApps;
+    this.app = new App();
   }
 
 
@@ -57,11 +59,9 @@ public class SelectedAppsFragment extends Fragment implements OnItemClickListene
     recyclerView.setAdapter(adapter);
   }
 
-
   @Override
-  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    App app = selectedApps.get(position);
+  public void onAppClick(int position) {
+    app = selectedApps.get(position);
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
     fragmentManager.beginTransaction()
         .add(R.id.fragment_container, new selectTimeFragment(app), null)
@@ -72,15 +72,5 @@ public class SelectedAppsFragment extends Fragment implements OnItemClickListene
   @Override
   public void onClick(View v) {
 
-  }
-
-  @Override
-  public void onAppClick(int position) {
-    App app = selectedApps.get(position);
-    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-    fragmentManager.beginTransaction()
-        .add(R.id.fragment_container, new selectTimeFragment(app), null)
-        .addToBackStack(selectTimeFragment.class.getName())
-        .commit();
   }
 }
