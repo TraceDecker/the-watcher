@@ -23,7 +23,7 @@ public interface AppDao {
   long insert(App app);
 
   @Insert(onConflict = OnConflictStrategy.IGNORE)
-  void insert(List<App> appsList);
+  List<Long> insert(List<App> appsList);
 
   @Delete
   Single<Integer> delete(App... apps);

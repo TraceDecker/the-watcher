@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import io.reactivex.Single;
+import java.util.Collection;
 import java.util.List;
 
 public class LocationRepository {
@@ -38,7 +39,9 @@ public class LocationRepository {
     return database.getLocationDao().getLocationById(locationId);
   }
 
-
+  public Single<List<Long>> insertLocations(Collection<Location> locations) {
+    return database.getLocationDao().insert(locations);
+  }
 
   private static class InstanceHolder {
 

@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.thewatcher.viewmodel;
 
 import android.app.Application;
+import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleObserver;
@@ -43,5 +44,15 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
 
   public LiveData<List<Location>> getLocations() {
     return locationRepository.getAllLocations();
+  }
+
+  public class InsertPolicyAndLocationTask extends AsyncTask<Void, Void, Void> {
+
+    List<Policy> policiesToInsert = policies;
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+      return null;
+    }
   }
 }

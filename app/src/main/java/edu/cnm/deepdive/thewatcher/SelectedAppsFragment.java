@@ -3,24 +3,28 @@ package edu.cnm.deepdive.thewatcher;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import edu.cnm.deepdive.thewatcher.model.dao.AppDao;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.List;
 
 
-public class SelectedAppsFragment extends Fragment {
+public class SelectedAppsFragment extends Fragment implements OnClickListener {
 
   private List<App> selectedApps;
   private  MainViewModel viewModel;
   private RecyclerView recyclerView;
   private SelectedAppRecyclerAdapter adapter;
+  private Button button;
 
   public SelectedAppsFragment() {
     // Required empty public constructor
@@ -38,6 +42,8 @@ public class SelectedAppsFragment extends Fragment {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_selected_apps, container, false);
     recyclerView = view.findViewById(R.id.apps_selected);
+    button = view.findViewById(R.id.apps_selected_done);
+    button.setOnClickListener(this);
     return view;
   }
 
@@ -49,14 +55,15 @@ public class SelectedAppsFragment extends Fragment {
     recyclerView.setAdapter(adapter);
   }
 
-//  @Override
-//  public void onAppClick(int position) {
-//    app = selectedApps.get(position);
-//    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//    fragmentManager.beginTransaction()
-//        .add(R.id.fragment_container, new selectTimeFragment(app), null)
-//        .addToBackStack(selectTimeFragment.class.getName())
-//        .commit();
-//  }
-//
+  @Override
+  public void onClick(View v) {
+    int[] durations = adapter.getDurations();
+
+    for (int i = 0; i < selectedApps.size(); i++) {
+      App appToBeInserted = selectedApps.get(i);
+      int time = durations[i];
+
+    }
+  }
+
 }

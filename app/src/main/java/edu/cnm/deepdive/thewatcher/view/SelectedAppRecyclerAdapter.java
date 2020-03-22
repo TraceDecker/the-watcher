@@ -119,5 +119,9 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   }
 
+  public int[] getDurations() {
+    return durations;
+  }
+
 }
 

@@ -31,6 +31,14 @@ public class AppRepository {
     return InstanceHolder.INSTANCE;
   }
 
+  public long insertApp(App app) {
+    return database.getAppDao().insert(app);
+  }
+
+  public List<Long> insertApps(List<App> apps) {
+    return database.getAppDao().insert(apps);
+  }
+
   public LiveData<List<App>> getAllApps() {
 
     LiveData<List<App>> apps = database.getAppDao().select();

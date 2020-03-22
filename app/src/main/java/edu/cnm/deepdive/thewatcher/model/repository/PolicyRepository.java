@@ -6,6 +6,7 @@ import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
+import io.reactivex.Single;
 import java.util.List;
 
 public class PolicyRepository {
@@ -45,6 +46,10 @@ public class PolicyRepository {
 
   public LiveData<List<Policy>> getAllPolcies(Location location) {
     return database.getPolicyDao().selectByLocation(location.getLocationId());
+  }
+
+  public Single<List<Long>> insertPolicies(List<Policy> policies) {
+    return database.getPolicyDao().insert(policies);
   }
 
   private static class InstanceHolder {
