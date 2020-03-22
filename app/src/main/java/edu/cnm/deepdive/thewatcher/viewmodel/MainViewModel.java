@@ -23,6 +23,9 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   private final AppRepository appRepository;
   private final PolicyRepository policyRepository;
   private final LocationRepository locationRepository;
+  private List<Policy> newPolicies;
+  private List<Location> newLocations;
+  private Location newLocation;
 
   public MainViewModel(@NonNull Application application) {
     super(application);
@@ -48,10 +51,12 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
 
   public class InsertPolicyAndLocationTask extends AsyncTask<Void, Void, Void> {
 
-    List<Policy> policiesToInsert = policies;
-
     @Override
     protected Void doInBackground(Void... voids) {
+
+
+      locationRepository.insertLocations(newLocations);
+      policyRepository.insertPolicies(newPolicies);
       return null;
     }
   }

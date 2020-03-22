@@ -14,11 +14,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.internal.IGoogleMapDelegate;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import edu.cnm.deepdive.thewatcher.controller.ui.home.HomeFragment;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
+import edu.cnm.deepdive.thewatcher.model.entity.Location;
+import edu.cnm.deepdive.thewatcher.model.repository.LocationRepository;
+import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import edu.cnm.deepdive.thewatcher.view.PackAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class AppSelectFragment extends Fragment implements OnItemClickListener, OnClickListener {
@@ -28,28 +39,29 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   private PackAdapter packAdapter;
   private List<App> selectedApps;
   private List<App> allApps;
+  private LocationRepository locationRepository;
+  private Location newLocation;
 
   public AppSelectFragment() {
     selectedApps = new ArrayList<>();
+    locationRepository = LocationRepository.getInstance();
     // Required empty public constructor
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_app_select, container, false);
     gridView = view.findViewById(R.id.grid_view_apps);
     gridView.setOnItemClickListener(this);
     Button button = view.findViewById(R.id.next_button);
     button.setOnClickListener(this);
-//    gridView.setOnItemSelectedListener(this);
-
     return view;
   }
 
@@ -57,7 +69,6 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
     mainViewModel.getApps().observe(getViewLifecycleOwner(), (Apps) -> {
       PackAdapter packAdapter = new PackAdapter(Apps, getContext());
       gridView.setAdapter(packAdapter);
@@ -76,10 +87,16 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
 
   @Override
   public void onClick(View view) {
+    newLocation = new Location();
+    newLocation.setLatitude(4892);
+    newLocation.setLongitude(7654);
+    HomeFragment.locationHelper();
+    locationRepository.insertLocation(newLocation);
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
     fragmentManager.beginTransaction()
         .add(R.id.fragment_container, new SelectedAppsFragment(selectedApps), null)
         .addToBackStack(AppSelectFragment.class.getName())
         .commit();
   }
+
 }

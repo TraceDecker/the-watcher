@@ -39,8 +39,9 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   @Override
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-      View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.selected_app_item, parent, false);
-      return new Holder(root);
+    View root = LayoutInflater.from(parent.getContext())
+        .inflate(R.layout.selected_app_item, parent, false);
+    return new Holder(root);
   }
 
   @Override
@@ -73,7 +74,7 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     private Holder(@NonNull View itemView) {
       super(itemView);
       icon = itemView.findViewById(R.id.icon);
-      appName = itemView.findViewById(R.id.app_name);
+      appName = itemView.findViewById(R.id.app_name_to_display);
       timeLayout = itemView.findViewById(R.id.time_layout);
       timeValue = itemView.findViewById(R.id.time_value);
       timeValue.addTextChangedListener(this);
@@ -81,9 +82,9 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
     private void bind(int position, App app) throws NameNotFoundException {
       icon.setImageDrawable(manager.getApplicationIcon(app.getAppPackage()));
-     appName.setText(appName.getText());
-     timeValue.setText(Integer.toString(durations[position]));
-     setSelected(position == selectedItem);
+      appName.setText(appName.getText());
+      timeValue.setText(Integer.toString(durations[position]));
+      setSelected(position == selectedItem);
       itemView.setOnClickListener((v) -> {
         if (!selected) {
           setSelected(true);

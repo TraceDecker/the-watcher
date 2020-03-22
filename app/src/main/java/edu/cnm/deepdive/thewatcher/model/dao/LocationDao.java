@@ -18,6 +18,9 @@ public interface LocationDao {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   Single<List<Long>> insert(Collection<Location> location);
 
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  Single<Long> insert(Location location);
+
   @Update
   Single<Integer> update(Location location);
 

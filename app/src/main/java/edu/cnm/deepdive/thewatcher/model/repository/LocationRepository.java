@@ -43,6 +43,10 @@ public class LocationRepository {
     return database.getLocationDao().insert(locations);
   }
 
+  public Single<Long> insertLocation(Location location) {
+    return database.getLocationDao().insert(location);
+  }
+
   private static class InstanceHolder {
 
     private static final LocationRepository INSTANCE = new LocationRepository();

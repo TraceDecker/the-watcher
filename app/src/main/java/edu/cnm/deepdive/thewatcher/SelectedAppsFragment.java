@@ -13,8 +13,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.thewatcher.model.dao.AppDao;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
+import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -57,12 +61,17 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
 
   @Override
   public void onClick(View v) {
-    int[] durations = adapter.getDurations();
 
+    List<App> appsToBeDisplayed = new ArrayList<>();
+
+    int[] durations = adapter.getDurations();
     for (int i = 0; i < selectedApps.size(); i++) {
       App appToBeInserted = selectedApps.get(i);
+      appsToBeDisplayed.addAll(selectedApps);
       int time = durations[i];
-
+      Policy policy = new Policy();
+      policy.setTimeValue(time);
+      policy.setAppId(appToBeInserted.getId());
     }
   }
 

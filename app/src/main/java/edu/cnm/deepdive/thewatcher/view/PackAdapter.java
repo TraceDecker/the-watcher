@@ -51,7 +51,7 @@ public class PackAdapter extends BaseAdapter {
         convertView.findViewById(R.id.icon);
 
     final TextView textView =
-        convertView.findViewById(R.id.app_name);
+        convertView.findViewById(R.id.app_name_to_display);
 
 //    imageView.setImageDrawable(context.getDrawable(R.drawable.amu_bubble_mask));
     try {
