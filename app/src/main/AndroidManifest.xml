@@ -16,9 +16,6 @@
     <activity android:name=".UserCreationActivity"
       android:parentActivityName=".controller.MainActivity">
     </activity>
-    <activity android:name=".AppSelectActivity"
-      android:parentActivityName=".controller.MainActivity">
-    </activity>
 
     <activity android:name=".controller.LoginActivity">
 

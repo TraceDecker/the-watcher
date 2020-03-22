@@ -1,36 +1,26 @@
 package edu.cnm.deepdive.thewatcher;
 
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.fragment.app.FragmentManager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter.OnAppListener;
+import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.List;
 
 
-public class SelectedAppsFragment extends Fragment implements OnClickListener,
-    OnAppListener {
+public class SelectedAppsFragment extends Fragment {
 
   private List<App> selectedApps;
   private  MainViewModel viewModel;
   private RecyclerView recyclerView;
   private SelectedAppRecyclerAdapter adapter;
-  private App app;
 
   public SelectedAppsFragment() {
     // Required empty public constructor
@@ -39,7 +29,6 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener,
 
   public SelectedAppsFragment(List<App> selectedApps) {
     this.selectedApps = selectedApps;
-    this.app = new App();
   }
 
 
@@ -56,22 +45,18 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener,
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-    adapter = new SelectedAppRecyclerAdapter(getContext(), selectedApps, this);
+    adapter = new SelectedAppRecyclerAdapter(getContext(), selectedApps);
     recyclerView.setAdapter(adapter);
   }
 
-  @Override
-  public void onAppClick(int position) {
-    app = selectedApps.get(position);
-    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-    fragmentManager.beginTransaction()
-        .add(R.id.fragment_container, new selectTimeFragment(app), null)
-        .addToBackStack(selectTimeFragment.class.getName())
-        .commit();
-  }
-
-  @Override
-  public void onClick(View v) {
-
-  }
+//  @Override
+//  public void onAppClick(int position) {
+//    app = selectedApps.get(position);
+//    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//    fragmentManager.beginTransaction()
+//        .add(R.id.fragment_container, new selectTimeFragment(app), null)
+//        .addToBackStack(selectTimeFragment.class.getName())
+//        .commit();
+//  }
+//
 }

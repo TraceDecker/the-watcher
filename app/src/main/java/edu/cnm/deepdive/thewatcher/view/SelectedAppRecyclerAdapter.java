@@ -23,15 +23,13 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   private final Context context;
   private final PackageManager manager;
   private final List<App> selectedApps;
-  private final OnAppListener onAppListener;
   private final int[] durations;
   private int selectedItem;
 
 
-  public SelectedAppRecyclerAdapter(Context context, List<App> selectedApps, OnAppListener onAppListener) {
+  public SelectedAppRecyclerAdapter(Context context, List<App> selectedApps) {
     this.context = context;
     this.selectedApps = selectedApps;
-    this.onAppListener = onAppListener;
     selectedItem = -1;
     manager = context.getPackageManager();
     durations = new int[selectedApps.size()];
@@ -116,11 +114,9 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     public void afterTextChanged(Editable s) {
       String entry = timeValue.getText().toString().trim();
       durations[getAdapterPosition()] = (!entry.isEmpty()) ? Integer.parseInt(entry) : 0;
-    }
-  }
 
-  public interface OnAppListener {
-    void onAppClick(int position);
+    }
+
   }
 
 }

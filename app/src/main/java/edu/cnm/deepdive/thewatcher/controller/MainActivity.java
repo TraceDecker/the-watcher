@@ -1,8 +1,6 @@
 package edu.cnm.deepdive.thewatcher.controller;
 
 import android.Manifest;
-import android.Manifest.permission;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -20,11 +18,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import edu.cnm.deepdive.thewatcher.AppSelectFragment;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.selectTimeFragment.OnFragmentInteractionListener;
 import edu.cnm.deepdive.thewatcher.services.PackService;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 
-public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
   private MainViewModel mainViewModel;
@@ -77,9 +74,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
   private void setupViewModel() {
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-// not sure if this is doing the same thing as above.
-//    ActivityCompat.requestPermissions(this ,new String[]{permission.ACCESS_FINE_LOCATION,
-//        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
   }
 
   @Override
@@ -96,8 +90,4 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         || super.onSupportNavigateUp();
   }
 
-  @Override
-  public void onFragmentInteraction(Uri uri) {
-
-  }
 }
