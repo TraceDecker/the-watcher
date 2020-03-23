@@ -41,7 +41,6 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     locations = new MutableLiveData<>();
 
     locationProviderSerivce = new LocationProviderSerivce(getApplication());
-    locationProviderSerivce.getLocation();
   }
 
   public LiveData<List<App>> getApps() {
@@ -56,13 +55,13 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     return locationRepository.getAllLocations();
   }
 
-  public Single<Location> getLocationByLatLong() {
-    return locationRepository.getLocationByLatLong();
+  public Single<Location> getLocationByLatLong(double latitude, double longitude) {
+    return locationRepository.getLocationByLatLong(latitude, longitude);
   }
 
   public android.location.Location getCurrentDeviceLocation() {
-    Class serviceClass = LocationProviderSerivce.class;
-    return null;
+
+    return locationProviderSerivce.getLocation();
   }
 
   public class InsertPolicyAndLocationTask extends AsyncTask<Void, Void, Void> {
