@@ -46,8 +46,6 @@ public class PinsFragment extends Fragment implements OnMapReadyCallback {
     mainViewModel =
         ViewModelProviders.of(this).get(MainViewModel.class);
     View root = inflater.inflate(R.layout.fragment_pins, container, false);
-    final TextView textView = root.findViewById(R.id.text_pins);
-    final MapView mapView = root.findViewById(R.id.pins_map);
     return root;
   }
 

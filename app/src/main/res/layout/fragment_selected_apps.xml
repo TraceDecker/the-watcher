@@ -14,15 +14,15 @@ tools:context=".SelectedAppsFragment">
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:text="@string/apps_selected_prompt"
-  android:textSize="30sp"
+  android:textSize="@dimen/access_prompt_size"
   android:gravity="center|top"
-  android:layout_margin="10dp"
+  android:layout_margin="@dimen/access_prompt_margin"
   app:layout_constraintTop_toTopOf="parent"/>
 
 <androidx.recyclerview.widget.RecyclerView
   android:id="@+id/apps_selected"
   android:layout_width="match_parent"
-  android:layout_height="500dp"
+  android:layout_height="@dimen/selected_apps_view_height"
   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
   android:clickable="true"
   android:focusable="true"
@@ -35,6 +35,7 @@ tools:context=".SelectedAppsFragment">
   android:id="@+id/apps_selected_done"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
+  android:text="@string/done_button"
   app:layout_constraintTop_toBottomOf="@id/apps_selected"
   app:layout_constraintStart_toStartOf="parent"
   app:layout_constraintEnd_toEndOf="parent"/>

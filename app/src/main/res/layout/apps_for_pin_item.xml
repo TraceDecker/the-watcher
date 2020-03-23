@@ -8,9 +8,9 @@ android:layout_gravity="center">
 
 <ImageView
   android:id="@+id/icon_to_display"
-  android:layout_width="60dp"
-  android:layout_height="60dp"
-  android:layout_marginTop="8dp"
+  android:layout_width="@dimen/pin_item_width"
+  android:layout_height="@dimen/pin_item_height"
+  android:layout_marginTop="@dimen/pin_item_margin"
   app:layout_constraintTop_toTopOf="parent"
   app:layout_constraintStart_toStartOf="parent"
   app:layout_constraintEnd_toStartOf="@id/time_value_display"/>
@@ -20,13 +20,13 @@ android:layout_gravity="center">
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   app:layout_constraintTop_toBottomOf="@id/icon_to_display"
-  android:layout_margin="8dp"
+  android:layout_margin="@dimen/pin_item_name_margin"
   app:layout_constraintStart_toStartOf="parent"
   app:layout_constraintEnd_toStartOf="@id/time_value_display"/>
 
 <TextView
   android:id="@+id/time_value_display"
-  android:layout_width="60dp"
+  android:layout_width="@dimen/time_value_width"
   android:layout_height="wrap_content"
   app:layout_constraintTop_toTopOf="parent"
   app:layout_constraintBottom_toBottomOf="parent"

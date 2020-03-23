@@ -33,4 +33,7 @@
   <string name="amount_of_time_prompt">Enter how much time you want to have access to this app.</string>
   <string name="time_hint">Minutes</string>
   <string name="set_restriction">SET RESTRICTION</string>
+  <string name="done_button">DONE</string>
+  <string name="current_location_text">Current location</string>
+  <string name="maximum_time">Maximum time</string>
 </resources>
