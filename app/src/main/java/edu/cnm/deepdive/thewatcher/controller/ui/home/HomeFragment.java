@@ -3,21 +3,19 @@ package edu.cnm.deepdive.thewatcher.controller.ui.home;
 import android.Manifest;
 import android.Manifest.permission;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -26,10 +24,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.view.AppsToBeDisplayedRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
@@ -38,8 +36,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
   private MapView mapView;
   private TextView textView;
   private List<Policy> policyList;
+  private edu.cnm.deepdive.thewatcher.model.entity.Location locationEntity;
   private static GoogleMap googleMap;
   private RecyclerView recyclerView;
+  private List<App> appsList;
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
@@ -48,6 +48,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    appsList = new ArrayList<>();
 
     requestPermissions(INITIAL_PERMS, 0);
   }
@@ -57,10 +58,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
     View root = inflater.inflate(R.layout.fragment_home, container, false);
-     textView = root.findViewById(R.id.text_home);
-     mapView = root.findViewById(R.id.map);
-     recyclerView = root.findViewById(R.id.app_restrictions_at_pin);
-     mainViewModel.getPolicies();
+    textView = root.findViewById(R.id.text_home);
+    mapView = root.findViewById(R.id.map);
+    recyclerView = root.findViewById(R.id.app_restrictions_at_pin);
+
     return root;
   }
 
@@ -74,11 +75,44 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
       mapView.getMapAsync(this);
     }
 
+  }
+
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
     LinearLayoutManager manager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(manager);
     recyclerView.setHasFixedSize(true);
-//      AppsToBeDisplayedRecyclerAdapter adapter = new AppsToBeDisplayedRecyclerAdapter(getContext());
-//      recyclerView.setAdapter(adapter);
+
+    Location currentLocation = mainViewModel.getCurrentDeviceLocation();
+
+    if (currentLocation != null) {
+      mainViewModel
+          .getLocationByLatLong(currentLocation.getLatitude(), currentLocation.getLongitude())
+          .observe(getViewLifecycleOwner(), (Location) -> {
+            locationEntity = Location;
+          });
+      mainViewModel.getPoliciesByLocationId(locationEntity.getLocationId())
+          .observe(getViewLifecycleOwner(), (Policies) -> {
+            policyList = Policies;
+          });
+
+      getAppsFromPolicies();
+
+      recyclerView.setAdapter(new AppsToBeDisplayedRecyclerAdapter(getContext(), appsList));
+
+    }
+
+  }
+
+  private void getAppsFromPolicies() {
+
+    for (Policy policy : policyList
+    ) {
+      mainViewModel.getAppByPolicy(policy).observe(getViewLifecycleOwner(), (App) -> {
+        appsList.add(App);
+      });
+    }
 
   }
 

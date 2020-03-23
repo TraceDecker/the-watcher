@@ -36,6 +36,6 @@ public interface AppDao {
   LiveData<List<AppPolicies>> selectWithPolicies();
 
   @Query("SELECT * FROM App WHERE app_id = :appId")
-  Single<App> selectSingleByApp(long appId);
+  LiveData<App> selectSingleByApp(long appId);
 
 }

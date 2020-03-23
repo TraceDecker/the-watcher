@@ -12,14 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
@@ -39,7 +38,6 @@ public class PinsFragment extends Fragment implements OnMapReadyCallback {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     requestPermissions(INITIAL_PERMS, 0);
   }
 

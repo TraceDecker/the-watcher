@@ -45,7 +45,7 @@ public class AppRepository {
     return apps;
   }
 
-  public Single<App> getAppById(Policy policy) {
+  public LiveData<App> getAppById(Policy policy) {
     return database.getAppDao().selectSingleByApp(policy.getAppId());
   }
 

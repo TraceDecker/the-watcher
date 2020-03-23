@@ -55,13 +55,27 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     return locationRepository.getAllLocations();
   }
 
-  public Single<Location> getLocationByLatLong(double latitude, double longitude) {
+  public LiveData<Location> getLocationByLatLong(double latitude, double longitude) {
     return locationRepository.getLocationByLatLong(latitude, longitude);
   }
 
   public android.location.Location getCurrentDeviceLocation() {
 
     return locationProviderSerivce.getLocation();
+  }
+
+  public LiveData<List<Policy>> getPoliciesByLocationId(long locationId) {
+    return policyRepository.getPoliciesByLocation(locationId);
+  }
+
+  public LiveData<App> getAppByPolicy(Policy policy) {
+    return policyRepository.getAppByPolicy(policy);
+  }
+
+  public void savePoliciesAndLocations(List<Policy> newPolicies, List<Location> newLocations) {
+    this.newPolicies = newPolicies;
+    InsertPolicyAndLocationTask task = new InsertPolicyAndLocationTask();
+    task.execute();
   }
 
   public class InsertPolicyAndLocationTask extends AsyncTask<Void, Void, Void> {

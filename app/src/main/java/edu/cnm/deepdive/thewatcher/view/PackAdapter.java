@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.thewatcher.view;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ public class PackAdapter extends BaseAdapter {
 
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
+    ApplicationInfo applicationInfo = null;
     final App app = apps.get(position);
     if (convertView == null) {
       final LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -53,13 +55,13 @@ public class PackAdapter extends BaseAdapter {
     final TextView textView =
         convertView.findViewById(R.id.app_name_to_display);
 
-//    imageView.setImageDrawable(context.getDrawable(R.drawable.amu_bubble_mask));
     try {
       imageView.setImageDrawable(manager.getApplicationIcon(app.getAppPackage()));
     } catch (NameNotFoundException e) {
       e.printStackTrace();
     }
-    textView.setText(app.getAppName());
+//    textView.setText(app.getAppName());
+
     return convertView;
   }
 }

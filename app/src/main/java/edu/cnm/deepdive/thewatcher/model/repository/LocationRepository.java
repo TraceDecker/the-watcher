@@ -35,11 +35,11 @@ public class LocationRepository {
     return database.getLocationDao().select();
   }
 
-  public Single<Location> getLocationById(long locationId) {
+  public LiveData<Location> getLocationById(long locationId) {
     return database.getLocationDao().getLocationById(locationId);
   }
 
-  public Single<Location> getLocationByLatLong(double latitude, double longitude) {
+  public LiveData<Location> getLocationByLatLong(double latitude, double longitude) {
     return database.getLocationDao().getLocationByLatLong(latitude, longitude);
   }
 

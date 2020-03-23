@@ -69,8 +69,8 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-    mainViewModel.getApps().observe(getViewLifecycleOwner(), (Apps) -> {
-      PackAdapter packAdapter = new PackAdapter(Apps, getContext());
+      mainViewModel.getApps().observe(getViewLifecycleOwner(), (Apps) -> {
+        PackAdapter packAdapter = new PackAdapter(Apps, getContext());
       gridView.setAdapter(packAdapter);
       allApps = Apps;
     });
@@ -87,11 +87,6 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
 
   @Override
   public void onClick(View view) {
-    newLocation = new Location();
-    newLocation.setLatitude(4892);
-    newLocation.setLongitude(7654);
-    HomeFragment.locationHelper();
-    locationRepository.insertLocation(newLocation);
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
     fragmentManager.beginTransaction()
         .add(R.id.fragment_container, new SelectedAppsFragment(selectedApps), null)

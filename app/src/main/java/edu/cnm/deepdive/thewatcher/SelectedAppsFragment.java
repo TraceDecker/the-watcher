@@ -9,16 +9,14 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-import edu.cnm.deepdive.thewatcher.model.dao.AppDao;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
-import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -63,6 +61,7 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
   public void onClick(View v) {
 
     List<App> appsToBeDisplayed = new ArrayList<>();
+    List<Policy> newPolicies = new ArrayList<>();
 
     int[] durations = adapter.getDurations();
     for (int i = 0; i < selectedApps.size(); i++) {
@@ -72,6 +71,10 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
       Policy policy = new Policy();
       policy.setTimeValue(time);
       policy.setAppId(appToBeInserted.getId());
+//      viewModel.savePoliciesAndLocations();
+
+      FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+      fragmentManager.popBackStack();
     }
   }
 

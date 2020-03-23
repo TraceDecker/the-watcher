@@ -52,6 +52,14 @@ public class PolicyRepository {
     return database.getPolicyDao().insert(policies);
   }
 
+  public LiveData<List<Policy>> getPoliciesByLocation(long locationId) {
+    return database.getPolicyDao().selectByLocation(locationId);
+  }
+
+  public LiveData<App> getAppByPolicy(Policy policy) {
+    return null;
+  }
+
   private static class InstanceHolder {
 
     private static final PolicyRepository INSTANCE = new PolicyRepository();
