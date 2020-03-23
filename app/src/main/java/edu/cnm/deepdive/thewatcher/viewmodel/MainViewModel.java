@@ -13,6 +13,9 @@ import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.model.repository.AppRepository;
 import edu.cnm.deepdive.thewatcher.model.repository.LocationRepository;
 import edu.cnm.deepdive.thewatcher.model.repository.PolicyRepository;
+
+import edu.cnm.deepdive.thewatcher.services.LocationProviderSerivce;
+import io.reactivex.Single;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel implements LifecycleObserver {
@@ -26,6 +29,7 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   private List<Policy> newPolicies;
   private List<Location> newLocations;
   private Location newLocation;
+  private LocationProviderSerivce locationProviderSerivce;
 
   public MainViewModel(@NonNull Application application) {
     super(application);
@@ -35,6 +39,9 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     policies = new MutableLiveData<>();
     locationRepository = LocationRepository.getInstance();
     locations = new MutableLiveData<>();
+
+    locationProviderSerivce = new LocationProviderSerivce(getApplication());
+    locationProviderSerivce.getLocation();
   }
 
   public LiveData<List<App>> getApps() {
@@ -47,6 +54,15 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
 
   public LiveData<List<Location>> getLocations() {
     return locationRepository.getAllLocations();
+  }
+
+  public Single<Location> getLocationByLatLong() {
+    return locationRepository.getLocationByLatLong();
+  }
+
+  public android.location.Location getCurrentDeviceLocation() {
+    Class serviceClass = LocationProviderSerivce.class;
+    return null;
   }
 
   public class InsertPolicyAndLocationTask extends AsyncTask<Void, Void, Void> {

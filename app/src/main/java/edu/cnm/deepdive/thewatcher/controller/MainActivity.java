@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.thewatcher.controller;
 
 import android.Manifest;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,11 +16,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import edu.cnm.deepdive.thewatcher.AppSelectFragment;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.services.PackService;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
   private MainViewModel mainViewModel;
+  private FusedLocationProviderClient fusedLocationClient;
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
@@ -40,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
     ActivityCompat.requestPermissions(this, INITIAL_PERMS, 0);
     setContentView(R.layout.activity_main);
     Toolbar toolbar = findViewById(R.id.toolbar);

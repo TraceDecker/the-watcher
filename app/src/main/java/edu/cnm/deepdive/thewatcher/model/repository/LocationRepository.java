@@ -39,6 +39,10 @@ public class LocationRepository {
     return database.getLocationDao().getLocationById(locationId);
   }
 
+  public Single<Location> getLocationByLatLong(double latitude, double longitude) {
+    return database.getLocationDao().getLocationByLatLong(latitude, longitude);
+  }
+
   public Single<List<Long>> insertLocations(Collection<Location> locations) {
     return database.getLocationDao().insert(locations);
   }

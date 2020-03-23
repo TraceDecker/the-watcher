@@ -33,4 +33,7 @@ public interface LocationDao {
   @Query("SELECT * FROM Location WHERE location_id = :locationId")
   Single<Location> getLocationById(long locationId);
 
+  @Query("SELECT * FROM Location WHERE latitude = :latitude AND longitude = :longitude")
+  Single<Location> getLocationByLatLong(double latitude, double longitude);
+
 }

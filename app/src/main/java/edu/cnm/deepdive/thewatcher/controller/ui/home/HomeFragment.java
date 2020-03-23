@@ -25,13 +25,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import edu.cnm.deepdive.thewatcher.R;
+import edu.cnm.deepdive.thewatcher.model.entity.App;
+import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.view.AppsToBeDisplayedRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
+import java.util.List;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
   private MainViewModel mainViewModel;
   private MapView mapView;
+  private TextView textView;
+  private List<Policy> policyList;
   private static GoogleMap googleMap;
   private RecyclerView recyclerView;
 
@@ -51,9 +56,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
     View root = inflater.inflate(R.layout.fragment_home, container, false);
-    final TextView textView = root.findViewById(R.id.text_home);
-    final MapView mapView = root.findViewById(R.id.map);
-    final RecyclerView recyclerView = root.findViewById(R.id.app_restrictions_at_pin);
+     textView = root.findViewById(R.id.text_home);
+     mapView = root.findViewById(R.id.map);
+     recyclerView = root.findViewById(R.id.app_restrictions_at_pin);
+     mainViewModel.getPolicies();
     return root;
   }
 
@@ -67,13 +73,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
       mapView.getMapAsync(this);
     }
 
-    if (recyclerView == null) {
-      LinearLayoutManager manager = new LinearLayoutManager(getContext());
-      recyclerView.setLayoutManager(manager);
-      recyclerView.setHasFixedSize(true);
-//      AppsToBeDisplayedRecyclerAdapter adapter = new AppsToBeDisplayedRecyclerAdapter()
+    LinearLayoutManager manager = new LinearLayoutManager(getContext());
+    recyclerView.setLayoutManager(manager);
+    recyclerView.setHasFixedSize(true);
+//      AppsToBeDisplayedRecyclerAdapter adapter = new AppsToBeDisplayedRecyclerAdapter(getContext());
 //      recyclerView.setAdapter(adapter);
-    }
 
   }
 
@@ -106,9 +110,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
       this.googleMap.setMyLocationEnabled(true);
     }
 
-//    map.setMyLocationEnabled(true);
-//    map.addMarker(new MarkerOptions().position(new LatLng(35.089550, -106.504158)).title("Marker"));
-//    map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.089550, -106.504158)));
+//    googleMap.setMyLocationEnabled(true);
+//    googleMap.addMarker(new MarkerOptions().position(new LatLng(33,3)).title("Marker"));
+//    googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.089550, -106.504158)));
 
 //    map = googleMap;
 //    map.setMyLocationEnabled(true);
@@ -135,7 +139,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     super.onLowMemory();
     mapView.onLowMemory();
   }
-// test data attempting to add pin
+
+  // test data attempting to add pin
   public static void locationHelper() {
     googleMap.addMarker(new MarkerOptions().position(new LatLng(4892, 7654)).title("Test Pin"));
     googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(4892, 7654)));
