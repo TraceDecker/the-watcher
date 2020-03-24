@@ -81,17 +81,27 @@ _This app would be for:_
 
 ## External Services
 
-* Google Maps API [Maps SDK for Android](https://developers.google.com/maps/documentation/android-sdk/intro) - Service for displaying maps.
+* Google Maps API [Maps SDK for Android](https://developers.google.com/maps/documentation/android-sdk/intro) - Service for displaying maps. V.17.0.0
+
+* [Google Sign In Service](https://developers.google.com/identity/protocols/oauth2) Google OAuth 2.0. 
+
+* Android Maps [Utility Library](https://developers.google.com/maps/documentation/android-sdk/utility) - Utilities for android map tools.
 
 * Manifest.permission [Android Permissions](https://developer.android.com/reference/android/Manifest.permission) - Allows the app to use features like location, and is needed to make app restrictions function.
+
+### Permissions
+
+* Access Fine location. Restrictions cannot be set without location access.
+
+* Read External Storage. Apps cannot be selected without external storage access.
+
+* Internet access. Cannot access location without internet.
 
 ## Later Release Goals:
 
 * Mapbox [Forward Geocoding](https://docs.mapbox.com/api/search/#geocoding) - Allows the user to search for desired locations for pin dropping.
 
 * [DeviceAdminService](https://developer.android.com/reference/android/app/admin/DeviceAdminService?hl=en) - Allows the app to always run in the background, it also has the ability to disable/enable its own service. MUST use protected Permissions, otherwise device will ignore it.
-
-* Setting restrictions will not be available if the app does not have location access.
 
 ## Design Documentation
 
