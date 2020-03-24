@@ -13,7 +13,7 @@
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
 
-    <activity android:name=".UserCreationActivity"
+    <activity android:name=".controller.UserCreationActivity"
       android:parentActivityName=".controller.MainActivity">
     </activity>
 

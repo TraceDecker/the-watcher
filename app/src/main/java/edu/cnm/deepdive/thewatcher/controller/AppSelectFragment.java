@@ -1,6 +1,7 @@
-package edu.cnm.deepdive.thewatcher;
+package edu.cnm.deepdive.thewatcher.controller;
 
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -14,22 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.internal.IGoogleMapDelegate;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import edu.cnm.deepdive.thewatcher.controller.ui.home.HomeFragment;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
 import edu.cnm.deepdive.thewatcher.model.repository.LocationRepository;
-import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import edu.cnm.deepdive.thewatcher.view.PackAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class AppSelectFragment extends Fragment implements OnItemClickListener, OnClickListener {
@@ -40,12 +33,17 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   private List<App> selectedApps;
   private List<App> allApps;
   private LocationRepository locationRepository;
-  private Location newLocation;
+  private FusedLocationProviderClient mLocation;
+
 
   public AppSelectFragment() {
-    selectedApps = new ArrayList<>();
     locationRepository = LocationRepository.getInstance();
-    // Required empty public constructor
+    selectedApps = new ArrayList<>();
+  }
+
+  public AppSelectFragment(FusedLocationProviderClient fusedLocationProviderClient) {
+    this.mLocation = fusedLocationProviderClient;
+
   }
 
   @Override
@@ -89,7 +87,7 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   public void onClick(View view) {
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
     fragmentManager.beginTransaction()
-        .add(R.id.fragment_container, new SelectedAppsFragment(selectedApps), null)
+        .add(R.id.fragment_container, new SelectedAppsFragment(selectedApps, mLocation), null)
         .addToBackStack(AppSelectFragment.class.getName())
         .commit();
   }

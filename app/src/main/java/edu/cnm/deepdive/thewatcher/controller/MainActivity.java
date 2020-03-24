@@ -2,7 +2,6 @@ package edu.cnm.deepdive.thewatcher.controller;
 
 import android.Manifest;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -18,28 +17,32 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import edu.cnm.deepdive.thewatcher.AppSelectFragment;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.services.PackService;
-import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
   private MainViewModel mainViewModel;
   private FusedLocationProviderClient fusedLocationClient;
+  private Location mLocation;
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
       Manifest.permission.READ_EXTERNAL_STORAGE,
       Manifest.permission.ACCESS_COARSE_LOCATION
   };
+
+  public MainActivity() {
+
+  }
+
+  public MainActivity(Location mLocation) {
+    this.mLocation = mLocation;
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-            .add(R.id.fragment_container, new AppSelectFragment(), null)
+            .add(R.id.fragment_container, new AppSelectFragment(fusedLocationClient), null)
             .addToBackStack(AppSelectFragment.class.getName())
             .commit();
       }

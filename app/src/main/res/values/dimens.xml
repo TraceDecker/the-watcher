@@ -34,5 +34,5 @@
   <dimen name="input_margin">8dp</dimen>
   <dimen name="app_item_width">60dp</dimen>
   <dimen name="app_item_height">60dp</dimen>
-  <dimen name="app_name_margin">8dp</dimen>
+
 </resources>

@@ -72,7 +72,7 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     return policyRepository.getAppByPolicy(policy);
   }
 
-  public void savePoliciesAndLocations(List<Policy> newPolicies, List<Location> newLocations) {
+  public void savePoliciesAndLocations(List<Policy> newPolicies, android.location.Location newLocation) {
     this.newPolicies = newPolicies;
     InsertPolicyAndLocationTask task = new InsertPolicyAndLocationTask();
     task.execute();

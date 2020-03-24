@@ -1,8 +1,9 @@
 
-package edu.cnm.deepdive.thewatcher;
+package edu.cnm.deepdive.thewatcher.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import edu.cnm.deepdive.thewatcher.R;
 
 public class UserCreationActivity extends AppCompatActivity {
 

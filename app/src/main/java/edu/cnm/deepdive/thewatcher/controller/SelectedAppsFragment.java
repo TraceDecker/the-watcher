@@ -1,5 +1,6 @@
-package edu.cnm.deepdive.thewatcher;
+package edu.cnm.deepdive.thewatcher.controller;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import edu.cnm.deepdive.thewatcher.R;
 import edu.cnm.deepdive.thewatcher.model.entity.App;
 import edu.cnm.deepdive.thewatcher.model.entity.Policy;
 import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter;
@@ -26,6 +29,7 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
   private  MainViewModel viewModel;
   private RecyclerView recyclerView;
   private SelectedAppRecyclerAdapter adapter;
+  private Location mLocation;
   private Button button;
 
   public SelectedAppsFragment() {
@@ -33,8 +37,9 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
 
   }
 
-  public SelectedAppsFragment(List<App> selectedApps) {
+  public SelectedAppsFragment(List<App> selectedApps, FusedLocationProviderClient fusedLocationProviderClient) {
     this.selectedApps = selectedApps;
+    this.mLocation = mLocation;
   }
 
 
@@ -71,7 +76,7 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
       Policy policy = new Policy();
       policy.setTimeValue(time);
       policy.setAppId(appToBeInserted.getId());
-//      viewModel.savePoliciesAndLocations();
+      viewModel.savePoliciesAndLocations(newPolicies, mLocation);
 
       FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
       fragmentManager.popBackStack();
