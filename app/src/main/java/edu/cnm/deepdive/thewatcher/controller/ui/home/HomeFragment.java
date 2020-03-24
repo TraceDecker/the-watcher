@@ -23,8 +23,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.LocationEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.PolicyEntity;
 import edu.cnm.deepdive.thewatcher.view.AppsToBeDisplayedRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.ArrayList;
@@ -35,11 +36,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
   private MainViewModel mainViewModel;
   private MapView mapView;
   private TextView textView;
-  private List<Policy> policyList;
-  private edu.cnm.deepdive.thewatcher.model.entity.Location locationEntity;
+  private List<PolicyEntity> policyEntityList;
+  private LocationEntity locationEntity;
   private static GoogleMap googleMap;
   private RecyclerView recyclerView;
-  private List<App> appsList;
+  private List<AppEntity> appsList;
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
@@ -94,7 +95,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
           });
       mainViewModel.getPoliciesByLocationId(locationEntity.getLocationId())
           .observe(getViewLifecycleOwner(), (Policies) -> {
-            policyList = Policies;
+            policyEntityList = Policies;
           });
 
       getAppsFromPolicies();
@@ -107,9 +108,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
   private void getAppsFromPolicies() {
 
-    for (Policy policy : policyList
+    for (PolicyEntity policyEntity : policyEntityList
     ) {
-      mainViewModel.getAppByPolicy(policy).observe(getViewLifecycleOwner(), (App) -> {
+      mainViewModel.getAppByPolicy(policyEntity).observe(getViewLifecycleOwner(), (App) -> {
         appsList.add(App);
       });
     }

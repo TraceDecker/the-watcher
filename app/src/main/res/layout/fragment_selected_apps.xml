@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/colorSelectBackground"
-xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:appEntity="http://schemas.android.com/apk/res-auto"
 tools:context=".controller.SelectedAppsFragment">
 
 
@@ -17,28 +17,28 @@ tools:context=".controller.SelectedAppsFragment">
   android:textSize="@dimen/access_prompt_size"
   android:gravity="center|top"
   android:layout_margin="@dimen/access_prompt_margin"
-  app:layout_constraintTop_toTopOf="parent"/>
+  appEntity:layout_constraintTop_toTopOf="parent"/>
 
 <androidx.recyclerview.widget.RecyclerView
   android:id="@+id/apps_selected"
   android:layout_width="match_parent"
   android:layout_height="@dimen/selected_apps_view_height"
-  app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+  appEntity:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
   android:clickable="true"
   android:focusable="true"
-  app:layout_constraintTop_toBottomOf="@id/apps_selected_prompt"
-  app:layout_constraintBottom_toTopOf="@id/apps_selected_done"
-  app:layout_constraintStart_toStartOf="parent"
-  app:layout_constraintEnd_toEndOf="parent"/>
+  appEntity:layout_constraintTop_toBottomOf="@id/apps_selected_prompt"
+  appEntity:layout_constraintBottom_toTopOf="@id/apps_selected_done"
+  appEntity:layout_constraintStart_toStartOf="parent"
+  appEntity:layout_constraintEnd_toEndOf="parent"/>
 
 <Button
   android:id="@+id/apps_selected_done"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   android:text="@string/done_button"
-  app:layout_constraintTop_toBottomOf="@id/apps_selected"
-  app:layout_constraintStart_toStartOf="parent"
-  app:layout_constraintEnd_toEndOf="parent"/>
+  appEntity:layout_constraintTop_toBottomOf="@id/apps_selected"
+  appEntity:layout_constraintStart_toStartOf="parent"
+  appEntity:layout_constraintEnd_toEndOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.thewatcher.services;
 
 import android.app.Application;
+import android.content.Context;
 import android.location.Location;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -11,10 +12,9 @@ public class LocationProviderSerivce {
 
 
   private Location mlocation;
-  private Application context;
   private FusedLocationProviderClient fusedLocationClient;
 
-  public LocationProviderSerivce(Application context) {
+  public LocationProviderSerivce(Context context) {
     fusedLocationClient = LocationServices
         .getFusedLocationProviderClient(context);
   }

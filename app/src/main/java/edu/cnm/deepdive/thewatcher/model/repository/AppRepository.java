@@ -2,10 +2,9 @@ package edu.cnm.deepdive.thewatcher.model.repository;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.PolicyEntity;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
-import io.reactivex.Single;
 import java.util.List;
 
 public class AppRepository {
@@ -31,22 +30,22 @@ public class AppRepository {
     return InstanceHolder.INSTANCE;
   }
 
-  public long insertApp(App app) {
-    return database.getAppDao().insert(app);
+  public long insertApp(AppEntity appEntity) {
+    return database.getAppDao().insert(appEntity);
   }
 
-  public List<Long> insertApps(List<App> apps) {
-    return database.getAppDao().insert(apps);
+  public List<Long> insertApps(List<AppEntity> appEntities) {
+    return database.getAppDao().insert(appEntities);
   }
 
-  public LiveData<List<App>> getAllApps() {
+  public LiveData<List<AppEntity>> getAllApps() {
 
-    LiveData<List<App>> apps = database.getAppDao().select();
+    LiveData<List<AppEntity>> apps = database.getAppDao().select();
     return apps;
   }
 
-  public LiveData<App> getAppById(Policy policy) {
-    return database.getAppDao().selectSingleByApp(policy.getAppId());
+  public LiveData<AppEntity> getAppById(PolicyEntity policyEntity) {
+    return database.getAppDao().selectSingleByApp(policyEntity.getAppId());
   }
 
 

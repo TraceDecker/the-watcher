@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -18,9 +17,8 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
+import edu.cnm.deepdive.thewatcher.model.entity.LocationEntity;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.List;
 
@@ -95,10 +93,10 @@ public class PinsFragment extends Fragment implements OnMapReadyCallback {
   }
 
   private void addPins() {
-    List<Location> locs = mainViewModel.getLocations().getValue();
+    List<LocationEntity> locs = mainViewModel.getLocations().getValue();
 
     if (locs != null) {
-      for (Location loc: locs) {
+      for (LocationEntity loc: locs) {
         pinsMap.addMarker(new MarkerOptions()
             .position(new LatLng(loc.getLatitude(), loc.getLongitude()))
             .title(loc.getLocationName()));

@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.PolicyEntity;
+import edu.cnm.deepdive.thewatcher.services.LocationProviderSerivce;
 import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 import java.util.ArrayList;
@@ -25,21 +25,15 @@ import java.util.List;
 
 public class SelectedAppsFragment extends Fragment implements OnClickListener {
 
-  private List<App> selectedApps;
+  private List<AppEntity> selectedAppEntities;
   private  MainViewModel viewModel;
   private RecyclerView recyclerView;
   private SelectedAppRecyclerAdapter adapter;
   private Location mLocation;
   private Button button;
 
-  public SelectedAppsFragment() {
-    // Required empty public constructor
-
-  }
-
-  public SelectedAppsFragment(List<App> selectedApps, FusedLocationProviderClient fusedLocationProviderClient) {
-    this.selectedApps = selectedApps;
-    this.mLocation = mLocation;
+  public SelectedAppsFragment(List<AppEntity> selectedAppEntities) {
+    this.selectedAppEntities = selectedAppEntities;
   }
 
 
@@ -51,6 +45,8 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
     recyclerView = view.findViewById(R.id.apps_selected);
     button = view.findViewById(R.id.apps_selected_done);
     button.setOnClickListener(this);
+    LocationProviderSerivce locationProviderSerivce = new LocationProviderSerivce(getActivity());
+    mLocation = locationProviderSerivce.getLocation();
     return view;
   }
 
@@ -58,24 +54,24 @@ public class SelectedAppsFragment extends Fragment implements OnClickListener {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-    adapter = new SelectedAppRecyclerAdapter(getContext(), selectedApps);
+    adapter = new SelectedAppRecyclerAdapter(getContext(), selectedAppEntities);
     recyclerView.setAdapter(adapter);
   }
 
   @Override
   public void onClick(View v) {
 
-    List<App> appsToBeDisplayed = new ArrayList<>();
-    List<Policy> newPolicies = new ArrayList<>();
+    List<AppEntity> appsToBeDisplayed = new ArrayList<>();
+    List<PolicyEntity> newPolicies = new ArrayList<>();
 
     int[] durations = adapter.getDurations();
-    for (int i = 0; i < selectedApps.size(); i++) {
-      App appToBeInserted = selectedApps.get(i);
-      appsToBeDisplayed.addAll(selectedApps);
+    for (int i = 0; i < selectedAppEntities.size(); i++) {
+      AppEntity appEntityToBeInserted = selectedAppEntities.get(i);
+      appsToBeDisplayed.addAll(selectedAppEntities);
       int time = durations[i];
-      Policy policy = new Policy();
-      policy.setTimeValue(time);
-      policy.setAppId(appToBeInserted.getId());
+      PolicyEntity policyEntity = new PolicyEntity();
+      policyEntity.setTimeValue(time);
+      policyEntity.setAppId(appEntityToBeInserted.getId());
       viewModel.savePoliciesAndLocations(newPolicies, mLocation);
 
       FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

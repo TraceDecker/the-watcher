@@ -14,25 +14,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.thewatcher.R;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
 import edu.cnm.deepdive.thewatcher.view.SelectedAppRecyclerAdapter.Holder;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
 import java.util.List;
 
 public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
   private final PackageManager manager;
-  private final List<App> selectedApps;
+  private final List<AppEntity> selectedAppEntities;
   private final int[] durations;
   private int selectedItem;
 
 
-  public SelectedAppRecyclerAdapter(Context context, List<App> selectedApps) {
+  public SelectedAppRecyclerAdapter(Context context, List<AppEntity> selectedAppEntities) {
     this.context = context;
-    this.selectedApps = selectedApps;
+    this.selectedAppEntities = selectedAppEntities;
     selectedItem = -1;
     manager = context.getPackageManager();
-    durations = new int[selectedApps.size()];
+    durations = new int[selectedAppEntities.size()];
   }
 
   @NonNull
@@ -47,7 +47,7 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   @Override
   public void onBindViewHolder(@NonNull Holder holder, int position) {
     try {
-      holder.bind(position, selectedApps.get(position));
+      holder.bind(position, selectedAppEntities.get(position));
     } catch (NameNotFoundException e) {
       Log.e(getClass().getName(), e.getMessage(), e);
     }
@@ -55,7 +55,7 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   @Override
   public int getItemCount() {
-    return selectedApps.size();
+    return selectedAppEntities.size();
   }
 
   private void setSelectedItem(int selectedItem) {
@@ -80,8 +80,8 @@ public class SelectedAppRecyclerAdapter extends RecyclerView.Adapter<Holder> {
       timeValue.addTextChangedListener(this);
     }
 
-    private void bind(int position, App app) throws NameNotFoundException {
-      icon.setImageDrawable(manager.getApplicationIcon(app.getAppPackage()));
+    private void bind(int position, AppEntity appEntity) throws NameNotFoundException {
+      icon.setImageDrawable(manager.getApplicationIcon(appEntity.getAppPackage()));
       appName.setText(appName.getText());
       timeValue.setText(Integer.toString(durations[position]));
       setSelected(position == selectedItem);

@@ -9,13 +9,13 @@ import androidx.room.PrimaryKey;
 @Entity(
     foreignKeys = {
         @ForeignKey(
-            entity = App.class,
+            entity = AppEntity.class,
             parentColumns = "app_id",
             childColumns = "app_id",
             onDelete = ForeignKey.CASCADE
         ),
         @ForeignKey(
-            entity = Location.class,
+            entity = LocationEntity.class,
             parentColumns = "location_id",
             childColumns = "location_id",
             onDelete = ForeignKey.CASCADE
@@ -27,8 +27,8 @@ import androidx.room.PrimaryKey;
         @Index(value = "location_id")
     }
 )
-// Layout of Policy table.
-public class Policy {
+// Layout of PolicyEntity table.
+public class PolicyEntity {
 
   @ColumnInfo(name = "policy_id")
   @PrimaryKey(autoGenerate = true)

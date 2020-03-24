@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
   android:id="@+id/fragment_container"
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:appEntity="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+  appEntity:layout_behavior="@string/appbar_scrolling_view_behavior"
   tools:showIn="@layout/app_bar_main">
 
   <fragment
@@ -14,10 +14,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="androidx.navigation.fragment.NavHostFragment"
-    app:defaultNavHost="true"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:navGraph="@navigation/mobile_navigation"/>
+    appEntity:defaultNavHost="true"
+    appEntity:layout_constraintLeft_toLeftOf="parent"
+    appEntity:layout_constraintRight_toRightOf="parent"
+    appEntity:layout_constraintTop_toTopOf="parent"
+    appEntity:navGraph="@navigation/mobile_navigation"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

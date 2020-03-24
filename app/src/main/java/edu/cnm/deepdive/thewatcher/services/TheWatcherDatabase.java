@@ -7,12 +7,12 @@ import androidx.room.RoomDatabase;
 import edu.cnm.deepdive.thewatcher.model.dao.AppDao;
 import edu.cnm.deepdive.thewatcher.model.dao.LocationDao;
 import edu.cnm.deepdive.thewatcher.model.dao.PolicyDao;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
-import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.LocationEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.PolicyEntity;
 
 @Database(
-    entities = {App.class, Policy.class, Location.class},
+    entities = {AppEntity.class, PolicyEntity.class, LocationEntity.class},
     version = 1,
     exportSchema = true
 )

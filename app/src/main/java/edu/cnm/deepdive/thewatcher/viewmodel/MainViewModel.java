@@ -7,28 +7,27 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
-import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.LocationEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.PolicyEntity;
 import edu.cnm.deepdive.thewatcher.model.repository.AppRepository;
 import edu.cnm.deepdive.thewatcher.model.repository.LocationRepository;
 import edu.cnm.deepdive.thewatcher.model.repository.PolicyRepository;
 
 import edu.cnm.deepdive.thewatcher.services.LocationProviderSerivce;
-import io.reactivex.Single;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel implements LifecycleObserver {
 
-  private final MutableLiveData<List<App>> apps;
-  private final MutableLiveData<List<Policy>> policies;
-  private final MutableLiveData<List<Location>> locations;
+  private final MutableLiveData<List<AppEntity>> apps;
+  private final MutableLiveData<List<PolicyEntity>> policies;
+  private final MutableLiveData<List<LocationEntity>> locations;
   private final AppRepository appRepository;
   private final PolicyRepository policyRepository;
   private final LocationRepository locationRepository;
-  private List<Policy> newPolicies;
-  private List<Location> newLocations;
-  private Location newLocation;
+  private List<PolicyEntity> newPolicies;
+  private List<LocationEntity> newLocationEntities;
+  private LocationEntity newLocationEntity;
   private LocationProviderSerivce locationProviderSerivce;
 
   public MainViewModel(@NonNull Application application) {
@@ -43,19 +42,19 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     locationProviderSerivce = new LocationProviderSerivce(getApplication());
   }
 
-  public LiveData<List<App>> getApps() {
+  public LiveData<List<AppEntity>> getApps() {
     return appRepository.getAllApps();
   }
 
-  public LiveData<List<Policy>> getPolicies() {
+  public LiveData<List<PolicyEntity>> getPolicies() {
     return policyRepository.getPolicyByValue();
   }
 
-  public LiveData<List<Location>> getLocations() {
+  public LiveData<List<LocationEntity>> getLocations() {
     return locationRepository.getAllLocations();
   }
 
-  public LiveData<Location> getLocationByLatLong(double latitude, double longitude) {
+  public LiveData<LocationEntity> getLocationByLatLong(double latitude, double longitude) {
     return locationRepository.getLocationByLatLong(latitude, longitude);
   }
 
@@ -64,15 +63,15 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     return locationProviderSerivce.getLocation();
   }
 
-  public LiveData<List<Policy>> getPoliciesByLocationId(long locationId) {
+  public LiveData<List<PolicyEntity>> getPoliciesByLocationId(long locationId) {
     return policyRepository.getPoliciesByLocation(locationId);
   }
 
-  public LiveData<App> getAppByPolicy(Policy policy) {
-    return policyRepository.getAppByPolicy(policy);
+  public LiveData<AppEntity> getAppByPolicy(PolicyEntity policyEntity) {
+    return policyRepository.getAppByPolicy(policyEntity);
   }
 
-  public void savePoliciesAndLocations(List<Policy> newPolicies, android.location.Location newLocation) {
+  public void savePoliciesAndLocations(List<PolicyEntity> newPolicies, android.location.Location newLocation) {
     this.newPolicies = newPolicies;
     InsertPolicyAndLocationTask task = new InsertPolicyAndLocationTask();
     task.execute();
@@ -84,7 +83,7 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     protected Void doInBackground(Void... voids) {
 
 
-      locationRepository.insertLocations(newLocations);
+      locationRepository.insertLocations(newLocationEntities);
       policyRepository.insertPolicies(newPolicies);
       return null;
     }

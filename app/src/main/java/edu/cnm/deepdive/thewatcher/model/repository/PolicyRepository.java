@@ -2,9 +2,9 @@ package edu.cnm.deepdive.thewatcher.model.repository;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
-import edu.cnm.deepdive.thewatcher.model.entity.Policy;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.LocationEntity;
+import edu.cnm.deepdive.thewatcher.model.entity.PolicyEntity;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import io.reactivex.Single;
 import java.util.List;
@@ -32,31 +32,31 @@ public class PolicyRepository {
     return InstanceHolder.INSTANCE;
   }
 
-  public LiveData<List<Policy>> getPolicyByValue() {
+  public LiveData<List<PolicyEntity>> getPolicyByValue() {
     return database.getPolicyDao().select();
   }
 
-  public LiveData<List<Policy>> getAllPolicies(App app, Location location) {
-    return database.getPolicyDao().selectByAppAndLocation(app.getId(), location.getLocationId());
+  public LiveData<List<PolicyEntity>> getAllPolicies(AppEntity appEntity, LocationEntity locationEntity) {
+    return database.getPolicyDao().selectByAppAndLocation(appEntity.getId(), locationEntity.getLocationId());
   }
 
-  public LiveData<List<Policy>> getAllPolicies(App app) {
-    return database.getPolicyDao().selectByApp(app.getId());
+  public LiveData<List<PolicyEntity>> getAllPolicies(AppEntity appEntity) {
+    return database.getPolicyDao().selectByApp(appEntity.getId());
   }
 
-  public LiveData<List<Policy>> getAllPolcies(Location location) {
-    return database.getPolicyDao().selectByLocation(location.getLocationId());
+  public LiveData<List<PolicyEntity>> getAllPolcies(LocationEntity locationEntity) {
+    return database.getPolicyDao().selectByLocation(locationEntity.getLocationId());
   }
 
-  public Single<List<Long>> insertPolicies(List<Policy> policies) {
+  public Single<List<Long>> insertPolicies(List<PolicyEntity> policies) {
     return database.getPolicyDao().insert(policies);
   }
 
-  public LiveData<List<Policy>> getPoliciesByLocation(long locationId) {
+  public LiveData<List<PolicyEntity>> getPoliciesByLocation(long locationId) {
     return database.getPolicyDao().selectByLocation(locationId);
   }
 
-  public LiveData<App> getAppByPolicy(Policy policy) {
+  public LiveData<AppEntity> getAppByPolicy(PolicyEntity policyEntity) {
     return null;
   }
 

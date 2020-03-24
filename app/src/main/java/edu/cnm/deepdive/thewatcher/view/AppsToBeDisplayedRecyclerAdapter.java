@@ -12,17 +12,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
 import edu.cnm.deepdive.thewatcher.view.AppsToBeDisplayedRecyclerAdapter.Holder;
 import java.util.List;
 
 public class AppsToBeDisplayedRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
-  private final List<App> appsToBeDisplayed;
+  private final List<AppEntity> appsToBeDisplayed;
   private final PackageManager manager;
 
-  public AppsToBeDisplayedRecyclerAdapter(Context context, List<App> appsToBeDisplayed) {
+  public AppsToBeDisplayedRecyclerAdapter(Context context, List<AppEntity> appsToBeDisplayed) {
     this.context = context;
     this.appsToBeDisplayed = appsToBeDisplayed;
     this.manager = context.getPackageManager();
@@ -65,8 +65,8 @@ public class AppsToBeDisplayedRecyclerAdapter extends RecyclerView.Adapter<Holde
       displayedAppsLayout = itemView.findViewById(R.id.app_restrictions_at_pin);
     }
 
-    public void bind(int position, App app) throws NameNotFoundException {
-      icon.setImageDrawable(manager.getApplicationIcon(app.getAppPackage()));
+    public void bind(int position, AppEntity appEntity) throws NameNotFoundException {
+      icon.setImageDrawable(manager.getApplicationIcon(appEntity.getAppPackage()));
       appName.setText(appName.getText());
       timeValue.setText(timeValue.getText());
     }

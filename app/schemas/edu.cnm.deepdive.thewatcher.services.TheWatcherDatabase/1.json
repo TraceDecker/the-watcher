@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4ba657924e07207062551928929cccf3",
+    "identityHash": "b5f4b7aaf8b3c0ef03f6a6c333e995ad",
     "entities": [
       {
-        "tableName": "App",
+        "tableName": "AppEntity",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`app_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `app_name` TEXT COLLATE NOCASE, `app_package` TEXT COLLATE NOCASE)",
         "fields": [
           {
@@ -35,27 +35,27 @@
         },
         "indices": [
           {
-            "name": "index_App_app_name",
+            "name": "index_AppEntity_app_name",
             "unique": false,
             "columnNames": [
               "app_name"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_App_app_name` ON `${TABLE_NAME}` (`app_name`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_AppEntity_app_name` ON `${TABLE_NAME}` (`app_name`)"
           },
           {
-            "name": "index_App_app_package",
+            "name": "index_AppEntity_app_package",
             "unique": true,
             "columnNames": [
               "app_package"
             ],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_App_app_package` ON `${TABLE_NAME}` (`app_package`)"
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_AppEntity_app_package` ON `${TABLE_NAME}` (`app_package`)"
           }
         ],
         "foreignKeys": []
       },
       {
-        "tableName": "Policy",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`policy_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `app_id` INTEGER NOT NULL, `location_id` INTEGER NOT NULL, `restricted` INTEGER NOT NULL, `time_value` INTEGER NOT NULL, FOREIGN KEY(`app_id`) REFERENCES `App`(`app_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`location_id`) REFERENCES `Location`(`location_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "tableName": "PolicyEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`policy_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `app_id` INTEGER NOT NULL, `location_id` INTEGER NOT NULL, `restricted` INTEGER NOT NULL, `time_value` INTEGER NOT NULL, FOREIGN KEY(`app_id`) REFERENCES `AppEntity`(`app_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`location_id`) REFERENCES `LocationEntity`(`location_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -96,41 +96,41 @@
         },
         "indices": [
           {
-            "name": "index_Policy_time_value",
+            "name": "index_PolicyEntity_time_value",
             "unique": false,
             "columnNames": [
               "time_value"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_time_value` ON `${TABLE_NAME}` (`time_value`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_PolicyEntity_time_value` ON `${TABLE_NAME}` (`time_value`)"
           },
           {
-            "name": "index_Policy_app_id",
+            "name": "index_PolicyEntity_app_id",
             "unique": false,
             "columnNames": [
               "app_id"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_app_id` ON `${TABLE_NAME}` (`app_id`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_PolicyEntity_app_id` ON `${TABLE_NAME}` (`app_id`)"
           },
           {
-            "name": "index_Policy_location_id",
+            "name": "index_PolicyEntity_location_id",
             "unique": false,
             "columnNames": [
               "location_id"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_location_id` ON `${TABLE_NAME}` (`location_id`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_PolicyEntity_location_id` ON `${TABLE_NAME}` (`location_id`)"
           },
           {
-            "name": "index_Policy_restricted",
+            "name": "index_PolicyEntity_restricted",
             "unique": false,
             "columnNames": [
               "restricted"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Policy_restricted` ON `${TABLE_NAME}` (`restricted`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_PolicyEntity_restricted` ON `${TABLE_NAME}` (`restricted`)"
           }
         ],
         "foreignKeys": [
           {
-            "table": "App",
+            "table": "AppEntity",
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
@@ -141,7 +141,7 @@
             ]
           },
           {
-            "table": "Location",
+            "table": "LocationEntity",
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
@@ -154,7 +154,7 @@
         ]
       },
       {
-        "tableName": "Location",
+        "tableName": "LocationEntity",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL COLLATE NOCASE, `location_name` TEXT COLLATE NOCASE, `longitude` REAL NOT NULL, `latitude` REAL NOT NULL)",
         "fields": [
           {
@@ -190,28 +190,28 @@
         },
         "indices": [
           {
-            "name": "index_Location_location_name",
+            "name": "index_LocationEntity_location_name",
             "unique": true,
             "columnNames": [
               "location_name"
             ],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Location_location_name` ON `${TABLE_NAME}` (`location_name`)"
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_LocationEntity_location_name` ON `${TABLE_NAME}` (`location_name`)"
           },
           {
-            "name": "index_Location_longitude",
+            "name": "index_LocationEntity_longitude",
             "unique": false,
             "columnNames": [
               "longitude"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Location_longitude` ON `${TABLE_NAME}` (`longitude`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_LocationEntity_longitude` ON `${TABLE_NAME}` (`longitude`)"
           },
           {
-            "name": "index_Location_latitude",
+            "name": "index_LocationEntity_latitude",
             "unique": false,
             "columnNames": [
               "latitude"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Location_latitude` ON `${TABLE_NAME}` (`latitude`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_LocationEntity_latitude` ON `${TABLE_NAME}` (`latitude`)"
           }
         ],
         "foreignKeys": []
@@ -220,7 +220,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ba657924e07207062551928929cccf3')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b5f4b7aaf8b3c0ef03f6a6c333e995ad')"
     ]
   }
 }

@@ -2,7 +2,7 @@ package edu.cnm.deepdive.thewatcher.model.repository;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
-import edu.cnm.deepdive.thewatcher.model.entity.Location;
+import edu.cnm.deepdive.thewatcher.model.entity.LocationEntity;
 import edu.cnm.deepdive.thewatcher.services.TheWatcherDatabase;
 import io.reactivex.Single;
 import java.util.Collection;
@@ -31,24 +31,24 @@ public class LocationRepository {
     return InstanceHolder.INSTANCE;
   }
 
-  public LiveData<List<Location>> getAllLocations() {
+  public LiveData<List<LocationEntity>> getAllLocations() {
     return database.getLocationDao().select();
   }
 
-  public LiveData<Location> getLocationById(long locationId) {
+  public LiveData<LocationEntity> getLocationById(long locationId) {
     return database.getLocationDao().getLocationById(locationId);
   }
 
-  public LiveData<Location> getLocationByLatLong(double latitude, double longitude) {
+  public LiveData<LocationEntity> getLocationByLatLong(double latitude, double longitude) {
     return database.getLocationDao().getLocationByLatLong(latitude, longitude);
   }
 
-  public Single<List<Long>> insertLocations(Collection<Location> locations) {
-    return database.getLocationDao().insert(locations);
+  public Single<List<Long>> insertLocations(Collection<LocationEntity> locationEntities) {
+    return database.getLocationDao().insert(locationEntities);
   }
 
-  public Single<Long> insertLocation(Location location) {
-    return database.getLocationDao().insert(location);
+  public Single<Long> insertLocation(LocationEntity locationEntity) {
+    return database.getLocationDao().insert(locationEntity);
   }
 
   private static class InstanceHolder {

@@ -20,6 +20,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import edu.cnm.deepdive.thewatcher.R;
+import edu.cnm.deepdive.thewatcher.services.LocationProviderSerivce;
 import edu.cnm.deepdive.thewatcher.services.PackService;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
 
@@ -27,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration mAppBarConfiguration;
   private MainViewModel mainViewModel;
-  private FusedLocationProviderClient fusedLocationClient;
-  private Location mLocation;
 
   private static final String[] INITIAL_PERMS = {
       Manifest.permission.ACCESS_FINE_LOCATION,
@@ -40,17 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public MainActivity(Location mLocation) {
-    this.mLocation = mLocation;
-  }
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-
     ActivityCompat.requestPermissions(this, INITIAL_PERMS, 0);
     setContentView(R.layout.activity_main);
     Toolbar toolbar = findViewById(R.id.toolbar);
@@ -63,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-            .add(R.id.fragment_container, new AppSelectFragment(fusedLocationClient), null)
+            .add(R.id.fragment_container, new AppSelectFragment(), null)
             .addToBackStack(AppSelectFragment.class.getName())
             .commit();
       }

@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.thewatcher.controller;
 
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -17,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import edu.cnm.deepdive.thewatcher.R;
-import edu.cnm.deepdive.thewatcher.model.entity.App;
+import edu.cnm.deepdive.thewatcher.model.entity.AppEntity;
 import edu.cnm.deepdive.thewatcher.model.repository.LocationRepository;
 import edu.cnm.deepdive.thewatcher.view.PackAdapter;
 import edu.cnm.deepdive.thewatcher.viewmodel.MainViewModel;
@@ -30,19 +29,14 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   private MainViewModel mainViewModel;
   private GridView gridView;
   private PackAdapter packAdapter;
-  private List<App> selectedApps;
-  private List<App> allApps;
+  private List<AppEntity> selectedAppEntities;
+  private List<AppEntity> allAppEntities;
   private LocationRepository locationRepository;
   private FusedLocationProviderClient mLocation;
 
-
   public AppSelectFragment() {
     locationRepository = LocationRepository.getInstance();
-    selectedApps = new ArrayList<>();
-  }
-
-  public AppSelectFragment(FusedLocationProviderClient fusedLocationProviderClient) {
-    this.mLocation = fusedLocationProviderClient;
+    selectedAppEntities = new ArrayList<>();
 
   }
 
@@ -70,7 +64,7 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
       mainViewModel.getApps().observe(getViewLifecycleOwner(), (Apps) -> {
         PackAdapter packAdapter = new PackAdapter(Apps, getContext());
       gridView.setAdapter(packAdapter);
-      allApps = Apps;
+      allAppEntities = Apps;
     });
 
   }
@@ -78,7 +72,7 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
 
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    selectedApps.add(allApps.get(position));
+    selectedAppEntities.add(allAppEntities.get(position));
     view.setBackgroundColor(Color.LTGRAY);
   }
 
@@ -87,7 +81,7 @@ public class AppSelectFragment extends Fragment implements OnItemClickListener, 
   public void onClick(View view) {
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
     fragmentManager.beginTransaction()
-        .add(R.id.fragment_container, new SelectedAppsFragment(selectedApps, mLocation), null)
+        .add(R.id.fragment_container, new SelectedAppsFragment(selectedAppEntities), null)
         .addToBackStack(AppSelectFragment.class.getName())
         .commit();
   }

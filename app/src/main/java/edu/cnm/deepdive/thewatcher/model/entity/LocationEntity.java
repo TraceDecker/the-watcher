@@ -13,8 +13,8 @@ import java.util.List;
         @Index(value = "location_name", unique = true),
     }
 )
-// layout of Location table.
-public class Location {
+// layout of LocationEntity table.
+public class LocationEntity {
 
   @ColumnInfo(name = "location_id", collate = ColumnInfo.NOCASE)
   @PrimaryKey(autoGenerate = true)

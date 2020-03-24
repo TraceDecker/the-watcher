@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:appEntity="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -15,8 +15,8 @@
     android:text="@string/welcome_text"
     android:textSize="12pt"
     android:gravity="center"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/name_creation"/>
+    appEntity:layout_constraintTop_toTopOf="parent"
+    appEntity:layout_constraintBottom_toTopOf="@id/name_creation"/>
 
 
 
@@ -27,8 +27,8 @@
     android:padding="20dp"
     android:hint="@string/hint_name"
     android:inputType="textPersonName"
-    app:layout_constraintTop_toBottomOf="@id/create_name_prompt"
-    app:layout_constraintBottom_toTopOf="@id/username_creation"/>
+    appEntity:layout_constraintTop_toBottomOf="@id/create_name_prompt"
+    appEntity:layout_constraintBottom_toTopOf="@id/username_creation"/>
 
   <TextView
     android:id="@+id/username_prompt"
@@ -37,10 +37,10 @@
     android:text="@string/username_prompt_text"
     android:textSize="12pt"
     android:gravity="center"
-    app:layout_constraintTop_toBottomOf="@id/name_creation"
-    app:layout_constraintBottom_toTopOf="@id/username_creation"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    appEntity:layout_constraintTop_toBottomOf="@id/name_creation"
+    appEntity:layout_constraintBottom_toTopOf="@id/username_creation"
+    appEntity:layout_constraintStart_toStartOf="parent"
+    appEntity:layout_constraintEnd_toEndOf="parent"/>
 
   <EditText
     android:id="@+id/username_creation"
@@ -49,8 +49,8 @@
     android:padding="20dp"
     android:hint="@string/hint_username"
     android:inputType="none"
-    app:layout_constraintTop_toBottomOf="@id/name_creation"
-    app:layout_constraintBottom_toTopOf="@id/email"/>
+    appEntity:layout_constraintTop_toBottomOf="@id/name_creation"
+    appEntity:layout_constraintBottom_toTopOf="@id/email"/>
 
   <TextView
     android:id="@+id/email_prompt"
@@ -58,10 +58,10 @@
     android:layout_height="wrap_content"
     android:text="@string/email_prompt_text"
     android:textSize="12pt"
-    app:layout_constraintTop_toBottomOf="@id/username_creation"
-    app:layout_constraintBottom_toTopOf="@id/email"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    appEntity:layout_constraintTop_toBottomOf="@id/username_creation"
+    appEntity:layout_constraintBottom_toTopOf="@id/email"
+    appEntity:layout_constraintStart_toStartOf="parent"
+    appEntity:layout_constraintEnd_toEndOf="parent"/>
 
   <EditText
     android:id="@+id/email"
@@ -70,17 +70,17 @@
     android:padding="20dp"
     android:hint="@string/hint_email"
     android:inputType="textEmailAddress"
-    app:layout_constraintTop_toBottomOf="@id/username_creation"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    appEntity:layout_constraintTop_toBottomOf="@id/username_creation"
+    appEntity:layout_constraintBottom_toBottomOf="parent"/>
 
   <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="NEXT"
-    app:layout_constraintTop_toBottomOf="@id/email"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    appEntity:layout_constraintTop_toBottomOf="@id/email"
+    appEntity:layout_constraintBottom_toBottomOf="parent"
+    appEntity:layout_constraintStart_toStartOf="parent"
+    appEntity:layout_constraintEnd_toEndOf="parent"/>
 
 
 
