@@ -9,6 +9,32 @@ _Nowadays, cellphones and technology are a huge part of daily life. With the lev
 [Current State](current-state.md)
 
 [User Instructions](user-instructions.md)
+
+### Build Instructions
+
+GitHub repository can be found [here](https://github.com/TraceDecker/the-watcher)
+
+1. Open the GitHub site for the repository, and click the "clone or download" button(be sure to get the one makred SSH).
+
+2. Copy the link and open Android Studio/Intellij IDEA.
+
+3. Click "Import from version control" and paste the link in the box labeled "URL:". CLick "OK".
+
+4. The wizard will ask you two times if you would like to open the project, be sure to click no both times.
+
+5. Now click "Import project", and select the project from the location it was saved, and click "import".
+
+6. Once the project is imported, you'll need to get an API key for google maps. Visit [Get an API key](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
+
+7. Once you have the API key, go to your AndroidManifest.xml and insert the following as a child element of the <application> tag:
+
+```$xslt
+<meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="YOUR_API_KEY"/>
+```
+* For this step we recommend you put the API key in a file outside the project, and use a reference for that file in place of "android:value="YOUR_API_KEY".  
+
 ## Key Features
 
 * Time limits may be set for certain apps to save you from a 30 minute Facebook binge while you're at work or studying.
@@ -57,7 +83,7 @@ _This app would be for:_
 
 ## Later Release Goals:
 
-* Mapbox [Forward Geocoding](https://docs.mapbox.com/api/search/#geocoding) - Allows the user to search for desired locations for pin dropping.
+* Google Maps API [Forward Geocoding](https://developers.google.com/maps/documentation/geocoding/start) - Allows the user to search for desired locations for pin dropping.
 
 * [DeviceAdminService](https://developer.android.com/reference/android/app/admin/DeviceAdminService?hl=en) - Allows the app to always run in the background, it also has the ability to disable/enable its own service. MUST use protected Permissions, otherwise device will ignore it.
 
