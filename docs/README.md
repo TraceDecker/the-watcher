@@ -12,7 +12,7 @@ _Nowadays, cellphones and technology are a huge part of daily life. With the lev
 
 ### Build Instructions
 
-GitHub repository can be found [here](https://github.com/TraceDecker/the-watcher)
+GitHub repository can be found [here](https://github.com/TraceDecker/the-watcher).
 
 1. Open the GitHub site for the repository, and click the "clone or download" button(be sure to get the one makred SSH).
 
@@ -24,9 +24,11 @@ GitHub repository can be found [here](https://github.com/TraceDecker/the-watcher
 
 5. Now click "Import project", and select the project from the location it was saved, and click "import".
 
-6. Once the project is imported, you'll need to get an API key for google maps. Visit [Get an API key](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
+6. You will be asked how you want the project to be imported, and select "gradle" from the list.
 
-7. Once you have the API key, go to your AndroidManifest.xml and insert the following as a child element of the <application> tag:
+7. Once the project is imported, you'll need to get an API key for google maps. Visit [Get an API key](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
+
+8. Once you have the API key, go to your AndroidManifest.xml and insert the following as a child element of the \<application> tag:
 
 ```$xslt
 <meta-data

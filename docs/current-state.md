@@ -11,7 +11,7 @@
 
 * Restriction view contains some code to populate, insufficient for implementation.
 
-* Google sign in and user creation views have been created, but do not contain function code to take the received data and insert it into the database. Not accessible in current state.
+* Google sign in OAuth 2.0 and user creation views have been created and user can sign in with Oauth, but the project does not contain the functional code to take the received data and insert it into the database. Not accessible in current state.
 
 * Clicking in the navigation drawer and selecting a primary view(i.e., Home, Pins, restrictions) from app select view does not clear app select view.
 
